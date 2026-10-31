@@ -1,0 +1,1498 @@
+/* ==========================================================
+   ROUTIFY V2
+   DASHBOARD ADMINISTRADOR
+   DISEÑO PROFESIONAL
+========================================================== */
+/* ===============================
+   RESET GENERAL
+================================ */
+
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:
+    "Segoe UI",
+    system-ui,
+    sans-serif;
+
+}
+
+
+
+body{
+
+    min-height:100vh;
+
+    display:flex;
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #F4F8FB,
+        #E8F1FA
+    );
+
+    color:#263238;
+
+}
+
+
+
+/* ==========================================================
+   SIDEBAR
+========================================================== */
+
+
+.sidebar{
+
+
+    width:270px;
+
+    min-height:100vh;
+
+    padding:25px 20px;
+
+    display:flex;
+
+    flex-direction:column;
+
+
+    background:
+
+
+    linear-gradient(
+        180deg,
+        #0D47A1,
+        #1976D2
+    );
+
+
+    color:white;
+
+
+    box-shadow:
+
+    8px 0 25px rgba(0,0,0,.15);
+
+
+}
+
+
+
+/* LOGO */
+
+
+.logo{
+
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:45px;
+
+
+}
+
+
+
+.logo i{
+
+
+    width:55px;
+
+    height:55px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+
+    border-radius:16px;
+
+
+    background:
+
+    rgba(255,255,255,.15);
+
+
+    font-size:32px;
+
+
+}
+
+
+
+.logo strong{
+
+
+    display:block;
+
+    font-size:24px;
+
+}
+
+
+
+.logo span{
+
+
+    font-size:12px;
+
+    opacity:.8;
+
+    letter-spacing:2px;
+
+}
+
+
+
+
+/* MENU */
+
+
+nav{
+
+
+    flex:1;
+
+}
+
+
+
+nav a{
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:15px;
+
+
+    padding:15px;
+
+
+    margin-bottom:12px;
+
+
+    border-radius:15px;
+
+
+    color:white;
+
+
+    text-decoration:none;
+
+
+    transition:.3s;
+
+
+    cursor:pointer;
+
+
+}
+
+
+
+nav a i{
+
+
+    font-size:21px;
+
+}
+
+
+
+nav a:hover,
+nav a.active{
+
+
+    background:
+
+    rgba(255,255,255,.18);
+
+
+    transform:
+
+    translateX(6px);
+
+
+}
+
+
+
+
+
+/* BOTON SALIR */
+
+
+#btnCerrarSesion{
+
+
+    border:none;
+
+
+    background:
+
+    #43A047;
+
+
+    color:white;
+
+
+    padding:15px;
+
+
+    border-radius:15px;
+
+
+    font-size:15px;
+
+
+    cursor:pointer;
+
+
+    transition:.3s;
+
+
+}
+
+
+
+#btnCerrarSesion:hover{
+
+
+    background:#2E7D32;
+
+    transform:scale(1.03);
+
+
+}
+
+
+
+/* ==========================================================
+   CONTENIDO PRINCIPAL
+========================================================== */
+
+
+main{
+
+
+    flex:1;
+
+
+    padding:35px;
+
+
+    overflow:hidden;
+
+
+}
+
+
+
+/* ==========================================================
+   HEADER
+========================================================== */
+
+
+header{
+
+
+    display:flex;
+
+
+    justify-content:space-between;
+
+
+    align-items:center;
+
+
+    margin-bottom:35px;
+
+
+}
+
+
+
+header h1{
+
+
+    color:#0D47A1;
+
+
+    font-size:34px;
+
+
+}
+
+
+
+header p{
+
+
+    color:#607D8B;
+
+
+    margin-top:8px;
+
+
+}
+
+
+
+#nombreAdministrador{
+
+
+    color:#43A047;
+
+
+    font-weight:700;
+
+
+}
+
+
+
+/* AVATAR */
+
+
+.admin-avatar{
+
+
+    width:75px;
+
+
+    height:75px;
+
+
+    border-radius:50%;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    font-size:35px;
+
+
+    color:white;
+
+
+    background:
+
+
+    linear-gradient(
+        135deg,
+        #1976D2,
+        #43A047
+    );
+
+
+    box-shadow:
+
+    0 10px 25px rgba(0,0,0,.2);
+
+
+}
+
+
+
+/* ==========================================================
+   TARJETAS
+========================================================== */
+
+
+.cards{
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+    repeat(
+        4,
+        1fr
+    );
+
+
+    gap:25px;
+
+
+    margin-bottom:35px;
+
+
+}
+
+
+
+.card{
+
+
+    position:relative;
+
+
+    overflow:hidden;
+
+
+    background:
+
+    rgba(255,255,255,.85);
+
+
+    backdrop-filter:
+
+    blur(12px);
+
+
+    border-radius:22px;
+
+
+    padding:25px;
+
+
+    box-shadow:
+
+    0 15px 35px rgba(0,0,0,.08);
+
+
+    transition:.35s;
+
+
+}
+
+
+
+.card:hover{
+
+
+    transform:
+
+    translateY(-8px);
+
+
+}
+
+
+
+.card::before{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    width:120px;
+
+    height:120px;
+
+
+    right:-40px;
+
+    top:-40px;
+
+
+    border-radius:50%;
+
+
+    background:
+
+    rgba(25,118,210,.12);
+
+
+}
+
+
+
+.card i{
+
+
+    font-size:38px;
+
+
+    color:#1976D2;
+
+
+}
+
+
+
+.card h2{
+
+
+    margin-top:18px;
+
+
+    font-size:17px;
+
+
+    color:#607D8B;
+
+
+}
+
+
+
+.card strong{
+
+
+    display:block;
+
+
+    margin-top:10px;
+
+
+    font-size:38px;
+
+
+    color:#0D47A1;
+
+
+}
+
+
+
+
+
+/* ==========================================================
+   PANEL PRINCIPAL
+========================================================== */
+
+
+.panel{
+
+
+    background:white;
+
+
+    border-radius:25px;
+
+
+    padding:30px;
+
+
+    box-shadow:
+
+    0 15px 35px rgba(0,0,0,.08);
+
+
+}
+
+
+
+.panel h2{
+
+
+    color:#0D47A1;
+
+
+    margin-bottom:25px;
+
+
+}
+
+
+
+
+/* ACTIVIDAD */
+
+
+.empty{
+
+
+    height:220px;
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    color:#78909C;
+
+
+}
+
+
+
+.empty i{
+
+
+    font-size:55px;
+
+
+    margin-bottom:15px;
+
+
+}
+
+
+
+
+/* ==========================================================
+   TABLAS FUTURAS
+========================================================== */
+
+
+.admin-table{
+
+
+    width:100%;
+
+
+    border-collapse:collapse;
+
+
+}
+
+
+
+.admin-table th{
+
+
+    background:#0D47A1;
+
+
+    color:white;
+
+
+    padding:15px;
+
+
+}
+
+
+
+.admin-table td{
+
+
+    padding:14px;
+
+
+    border-bottom:
+
+    1px solid #ECEFF1;
+
+
+}
+
+
+
+.admin-table tr:hover{
+
+
+    background:#F4F8FB;
+
+
+}
+
+
+
+
+
+/* ==========================================================
+   BOTONES
+========================================================== */
+
+
+.btn-admin{
+
+
+    padding:12px 20px;
+
+
+    border:none;
+
+
+    border-radius:12px;
+
+
+    background:#1976D2;
+
+
+    color:white;
+
+
+    cursor:pointer;
+
+
+    transition:.3s;
+
+
+}
+
+
+
+.btn-admin:hover{
+
+
+    background:#0D47A1;
+
+
+}
+
+
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+
+@media(max-width:1200px){
+
+
+.cards{
+
+
+grid-template-columns:
+
+repeat(
+2,
+1fr
+);
+
+
+}
+
+
+
+}
+
+
+
+
+@media(max-width:800px){
+
+
+body{
+
+
+flex-direction:column;
+
+
+}
+
+
+
+.sidebar{
+
+
+width:100%;
+
+
+min-height:auto;
+
+
+}
+
+
+
+.cards{
+
+
+grid-template-columns:
+
+1fr;
+
+
+}
+
+
+
+main{
+
+
+padding:20px;
+
+
+}
+
+
+
+header{
+
+
+flex-direction:column;
+
+gap:20px;
+
+
+}
+
+
+
+}
+
+/* ==========================================================
+   INFORMACIÓN SUPERIOR DEL ADMIN
+========================================================== */
+
+
+.admin-header-info{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:flex-end;
+
+    gap:8px;
+
+    margin-right:20px;
+
+}
+
+
+
+.admin-header-info div{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    background:
+
+    rgba(67,160,71,.12);
+
+
+    color:#2E7D32;
+
+
+    padding:8px 15px;
+
+
+    border-radius:20px;
+
+
+    font-size:14px;
+
+}
+
+
+
+.admin-header-info i{
+
+    font-size:10px;
+
+    color:#43A047;
+
+}
+
+
+
+.admin-header-info span{
+
+
+    font-size:14px;
+
+    color:#607D8B;
+
+
+}
+
+
+
+
+/* ==========================================================
+   ICONOS DE TARJETAS
+========================================================== */
+
+
+.card{
+
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+
+}
+
+
+
+.card-icon{
+
+
+    width:65px;
+
+    height:65px;
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+    border-radius:18px;
+
+
+    background:
+
+    rgba(25,118,210,.12);
+
+
+}
+
+
+
+.card-icon i{
+
+
+    font-size:32px;
+
+
+    color:#1976D2;
+
+
+}
+
+
+
+.card-icon.green{
+
+
+    background:
+
+    rgba(67,160,71,.15);
+
+
+}
+
+
+
+.card-icon.green i{
+
+
+    color:#43A047;
+
+
+}
+
+
+
+
+
+/* ==========================================================
+   PANEL DE ACCIONES RÁPIDAS
+========================================================== */
+
+
+.quick-panel{
+
+
+    margin-top:30px;
+
+
+    background:white;
+
+
+    padding:30px;
+
+
+    border-radius:25px;
+
+
+    box-shadow:
+
+    0 15px 35px rgba(0,0,0,.08);
+
+
+}
+
+
+
+.quick-panel h2{
+
+
+    color:#0D47A1;
+
+
+    margin-bottom:25px;
+
+
+}
+
+
+
+
+.quick-grid{
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+    repeat(
+        4,
+        1fr
+    );
+
+
+    gap:20px;
+
+
+}
+
+
+
+.quick-grid button{
+
+
+    border:none;
+
+
+    padding:20px;
+
+
+    border-radius:18px;
+
+
+    background:
+
+    #F4F8FB;
+
+
+    color:#0D47A1;
+
+
+    font-size:15px;
+
+
+    cursor:pointer;
+
+
+    transition:.3s;
+
+
+}
+
+
+
+.quick-grid button i{
+
+
+    display:block;
+
+
+    font-size:30px;
+
+
+    margin-bottom:10px;
+
+
+}
+
+
+
+.quick-grid button:hover{
+
+
+    background:#1976D2;
+
+
+    color:white;
+
+
+    transform:translateY(-5px);
+
+
+}
+
+
+
+
+
+/* ==========================================================
+   MONITOREO
+========================================================== */
+
+
+.monitor-grid{
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+    2fr 1fr;
+
+
+    gap:25px;
+
+
+    margin-top:30px;
+
+
+}
+
+
+
+
+.map-placeholder{
+
+
+    height:300px;
+
+
+    border-radius:20px;
+
+
+    background:
+
+
+    linear-gradient(
+        135deg,
+        #E3F2FD,
+        #E8F5E9
+    );
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    align-items:center;
+
+
+    justify-content:center;
+
+
+    color:#607D8B;
+
+
+}
+
+
+
+.map-placeholder i{
+
+
+    font-size:60px;
+
+
+    color:#1976D2;
+
+
+    margin-bottom:15px;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================================
+   ALERTAS
+========================================================== */
+
+
+.alert-item{
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:15px;
+
+
+    padding:18px;
+
+
+    background:#F4F8FB;
+
+
+    border-radius:15px;
+
+
+}
+
+
+
+.alert-item i{
+
+
+    font-size:30px;
+
+
+    color:#43A047;
+
+
+}
+
+
+
+.alert-item strong{
+
+
+    color:#263238;
+
+
+}
+
+
+
+.alert-item p{
+
+
+    margin-top:5px;
+
+
+    color:#78909C;
+
+
+}
+
+
+
+
+
+/* ==========================================================
+   TABLA ADMINISTRATIVA
+========================================================== */
+
+
+.admin-table{
+
+
+    margin-top:15px;
+
+
+}
+
+
+
+.admin-table td{
+
+
+    text-align:center;
+
+
+}
+
+
+
+.admin-table td[colspan]{
+
+
+    color:#78909C;
+
+
+    padding:30px;
+
+
+}
+
+
+
+
+
+/* ==========================================================
+   RESPONSIVE EXTRA
+========================================================== */
+
+
+@media(max-width:1200px){
+
+
+.quick-grid{
+
+
+grid-template-columns:
+
+repeat(
+2,
+1fr
+);
+
+
+}
+
+
+
+.monitor-grid{
+
+
+grid-template-columns:
+
+1fr;
+
+
+}
+
+
+
+}
+
+
+
+
+@media(max-width:700px){
+
+
+.admin-header-info{
+
+
+align-items:center;
+
+
+}
+
+
+
+.quick-grid{
+
+
+grid-template-columns:
+
+1fr;
+
+
+}
+
+
+
+}
+
+/* ==========================
+   SECCIONES ADMIN
+========================== */
+
+
+.seccion{
+
+display:none;
+
+}
+
+
+.seccion.activa{
+
+display:block;
+
+}
+
+
+
+
+
+.contenido-admin{
+
+background:#ffffff;
+
+border-radius:20px;
+
+padding:30px;
+
+margin-top:30px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+
+
+
+
+table{
+
+width:100%;
+
+border-collapse:collapse;
+
+margin-top:20px;
+
+}
+
+
+
+table th{
+
+background:#0D47A1;
+
+color:white;
+
+padding:15px;
+
+text-align:left;
+
+}
+
+
+
+table td{
+
+padding:15px;
+
+border-bottom:1px solid #ddd;
+
+}
+
+
+
+
+
+table tr:hover{
+
+background:#f4f8fb;
+
+}
+
+
+
+
+
+.card{
+
+transition:.3s;
+
+}
+
+
+.card:hover{
+
+transform:translateY(-5px);
+
+}

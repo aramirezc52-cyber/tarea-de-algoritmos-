@@ -1,0 +1,2089 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Dashboard Pasajero | ROUTIFY
+    </title>
+
+
+    <!-- ==========================================
+            BOOTSTRAP
+    =========================================== -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+
+    <!-- ==========================================
+            BOOTSTRAP ICONS
+    =========================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    >
+
+
+    <!-- ==========================================
+            GOOGLE FONTS
+    =========================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- ==========================================
+            LEAFLET
+    =========================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet/dist/leaflet.css"
+    >
+
+
+    <!-- ==========================================
+            CSS ROUTIFY
+    =========================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/dashboard-pasajero.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/mapa-pasajero.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- ==========================================
+        APP ROUTIFY
+=========================================== -->
+
+<div class="routify-app">
+
+
+    <!-- ==========================================
+            SIDEBAR
+    =========================================== -->
+
+    <aside class="sidebar">
+
+
+        <!-- LOGO -->
+
+        <div class="sidebar-logo">
+
+            <div class="logo-icon">
+
+                <i class="bi bi-bus-front-fill"></i>
+
+            </div>
+
+
+            <div class="logo-text">
+
+                <h2>
+                    ROUTIFY
+                </h2>
+
+                <span>
+                    Smart Mobility
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- NAVEGACIÓN -->
+
+        <nav class="sidebar-menu">
+
+
+            <span class="menu-title">
+                MENÚ PRINCIPAL
+            </span>
+
+
+            <a
+                href="#"
+                class="menu-item active"
+            >
+
+                <i class="bi bi-grid-fill"></i>
+
+                <span>
+                    Inicio
+                </span>
+
+            </a>
+
+
+
+            <a
+                href="#rutas"
+                class="menu-item"
+            >
+
+                <i class="bi bi-signpost-split-fill"></i>
+
+                <span>
+                    Rutas
+                </span>
+
+            </a>
+
+
+
+            <a
+                href="#mapaSeccion"
+                class="menu-item"
+            >
+
+                <i class="bi bi-map-fill"></i>
+
+                <span>
+                    Mapa
+                </span>
+
+            </a>
+
+
+
+            <a
+                href="#misViajes"
+                class="menu-item"
+            >
+
+                <i class="bi bi-clock-history"></i>
+
+                <span>
+                    Mis viajes
+                </span>
+
+            </a>
+
+
+
+            <a
+                href="#alertasSeccion"
+                class="menu-item"
+            >
+
+                <i class="bi bi-bell-fill"></i>
+
+                <span>
+                    Alertas
+                </span>
+
+
+                <span class="menu-badge">
+                    3
+                </span>
+
+            </a>
+
+
+
+            <a
+                href="#favoritos"
+                class="menu-item"
+            >
+
+                <i class="bi bi-star-fill"></i>
+
+                <span>
+                    Favoritos
+                </span>
+
+            </a>
+
+
+
+            <span class="menu-title menu-title-secondary">
+                CUENTA
+            </span>
+
+
+
+            <a
+                href="#perfilSeccion"
+                class="menu-item"
+                id="btnMiPerfilSidebar"
+            >
+
+                <i class="bi bi-person-fill"></i>
+
+                <span>
+                    Mi perfil
+                </span>
+
+            </a>
+
+
+
+            <a
+                href="#configuracionSeccion"
+                class="menu-item"
+                id="btnConfiguracionSidebar"
+            >
+
+                <i class="bi bi-gear-fill"></i>
+
+                <span>
+                    Configuración
+                </span>
+
+            </a>
+
+        </nav>
+
+
+
+        <!-- USUARIO SIDEBAR -->
+
+        <div class="sidebar-user">
+
+
+            <div class="sidebar-user-avatar">
+
+                <i class="bi bi-person-fill"></i>
+
+            </div>
+
+
+            <div class="sidebar-user-info">
+
+                <strong id="nombreUsuario">
+                    Pasajero
+                </strong>
+
+                <span>
+                    Usuario ROUTIFY
+                </span>
+
+            </div>
+
+
+            <button
+                id="btncerrarSesion"
+                class="btn-sidebar-logout"
+                title="Cerrar sesión"
+            >
+
+                <i class="bi bi-box-arrow-right"></i>
+
+            </button>
+
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- ==========================================
+            CONTENIDO PRINCIPAL
+    =========================================== -->
+
+    <main class="main-content">
+
+
+        <!-- ==========================================
+                HEADER
+        =========================================== -->
+
+        <header class="topbar">
+
+
+            <!-- BUSCADOR -->
+
+            <div class="topbar-search">
+
+                <i class="bi bi-search"></i>
+
+                <input
+                    type="text"
+                    id="buscadorGlobal"
+                    placeholder="Buscar rutas, estaciones o destinos..."
+                >
+
+                <span class="search-shortcut">
+                    Ctrl + K
+                </span>
+
+            </div>
+
+
+
+            <!-- ACCIONES -->
+
+            <div class="topbar-actions">
+
+
+                <button
+                    class="topbar-button"
+                    title="Cambiar tema"
+                    id="btnTema"
+                >
+
+                    <i class="bi bi-moon-fill" 
+                    id="iconoTema"></i>
+
+                </button>
+
+                <div class="topbar-dropdown-wrapper">
+
+                    <button
+                        class="topbar-button notification-button"
+                        title="Notificaciones"
+                        id="btnNotificaciones"
+                    >
+
+                        <i class="bi bi-bell-fill"></i>
+
+                        <span class="notification-dot"></span>
+
+                    </button>
+
+                    <div class="topbar-dropdown notifications-dropdown" id="menuNotificaciones">
+                        
+                        <div class="dropdown-header">
+                            <div>
+
+                                <span>
+                                    Routify
+                                </span>
+
+                                <h3>
+                                    Notificaciones
+                                </h3>
+                            </div>
+
+                            <span class="dropdown-counter">
+                                3
+                            </span>
+                        </div>
+
+                        <div class="dropdown-notification-list">
+
+                            <div class="dropdown-notification">
+
+                                <div class="dropdown-notification-icon success">
+
+                                    <i class="bi bi-bus-front-fill"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Bus próximo
+                                    </strong>
+
+                                    <p>
+                                        Tu unidad está cerca de la parada.
+                                    </p>
+
+                                    <small>
+                                        Ahora
+                                    </small>
+                                </div>
+                            </div>
+
+                            <div class="dropdown-notification">
+                                <div class="dropdown-notification-icon warning">
+                                    <i class="bi bi-exclamation-triangle-fill"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Retraso detectado
+                                    </strong>
+
+                                    <p>
+                                        Ruta 101 presenta una demora.
+                                    </p>
+
+                                    <small>
+                                        Hace 5 min
+                                    </small>
+                                </div>
+                            </div>
+
+                            <div class="dropdown-notification">
+
+                                <div class="dropdown-notification-icon info">
+
+                                    <i class="bi bi-geo-alt-fill"></i>
+
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Ruta disponible
+                                    </strong>
+
+                                    <p>
+                                        Encontramos una ruta para tu destino.
+                                    </p>
+
+                                    <small>
+                                        Hace 10 min
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <button
+                            class="dropdown-footer-button"
+                            id="btnVerAlertas"
+                        >
+
+                            Ver todas las alertas
+
+                            <i class="bi bi-arrow-right"></i>
+
+                        </button>
+                    </div>
+                </div>
+
+
+                <div class="topbar-dropdown-wrapper">
+
+                    <div
+                        class="topbar-profile"
+                        id="btnPerfil"
+                    >
+                        <div class="profile-avatar">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+
+                        <div class="profile-info">
+
+                            <strong id="nombreTopbar">
+                                Mi cuenta
+                            </strong>
+
+                            <span>
+                                Pasajero
+                            </span>
+
+                        </div>
+
+                        <i
+                            class="bi bi-chevron-down profile-arrow"
+                            id="flechaPerfil"
+                        ></i>
+                    </div>
+
+                    <div
+                        class="topbar-dropdown profile-dropdown"
+                        id="menuPerfil"
+                    >
+                        <div class="profile-dropdown-user">
+
+                            <div class="profile-dropdown-avatar">
+
+                                <i class="bi bi-person-fill"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong id="nombreMenuPerfil">
+                                    Pasajero
+                                </strong>
+
+                                <span>
+                                    Cuenta ROUTIFY
+                                </span>
+
+                            </div>
+                        </div>
+
+                        <div class="profile-dropdown-divider"></div>
+
+                        <a
+                            href="#perfilSeccion"
+                            class="profile-dropdown-option"
+                            id="btnMiPerfilTopbar"
+                        >
+
+                            <i class="bi bi-person-circle"></i>
+
+                            <span>
+                                Mi perfil
+                            </span>
+                        </a>
+
+                        <a
+                            href="#configuracionSeccion"
+                            class="profile-dropdown-option"
+                            id="btnConfiguracionTopbar"
+                        >
+
+                            <i class="bi bi-gear-fill"></i>
+
+                            <span>
+                                Configuración
+                            </span>
+                        </a>
+
+                        <button
+                            class="profile-dropdown-option logout"
+                            id="btnCerrarSesionTopbar"
+                        >
+
+                            <i class="bi bi-box-arrow-right"></i>
+
+                            <span>
+                                Cerrar sesión
+                            </span>
+
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+
+        <!-- ==========================================
+                CONTENIDO DASHBOARD
+        =========================================== -->
+
+        <section class="dashboard-content" id="inicio">
+
+
+            <!-- ==========================================
+                    BIENVENIDA
+            =========================================== -->
+
+            <div class="dashboard-heading">
+
+
+                <div>
+
+                    <span class="dashboard-label">
+                        PANEL DE PASAJERO
+                    </span>
+
+
+                    <h1>
+
+                        Hola,
+
+                        <span id="nombreBienvenida">
+                            viajero
+                        </span>
+
+                        👋
+
+                    </h1>
+
+
+                    <p>
+
+                        Consulta tu próxima ruta y sigue tu bus
+                        en tiempo real.
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="dashboard-status">
+
+                    <span class="status-dot"></span>
+
+                    Sistema en línea
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ==========================================
+                    TARJETAS SUPERIORES
+            =========================================== -->
+
+            <section class="stats-grid">
+
+
+                <!-- BUS -->
+
+                <article class="stat-card">
+
+
+                    <div class="stat-card-top">
+
+
+                        <div class="stat-icon stat-icon-blue">
+
+                            <i class="bi bi-bus-front-fill"></i>
+
+                        </div>
+
+
+                        <span class="stat-badge stat-badge-success">
+
+                            En camino
+
+                        </span>
+
+
+                    </div>
+
+
+                    <div class="stat-content">
+
+                        <span class="stat-label">
+
+                            Próximo bus
+
+                        </span>
+
+
+                        <h3>
+
+                            Bus 203
+
+                        </h3>
+
+
+                        <p>
+
+                            Unidad B-025
+
+                        </p>
+
+                    </div>
+
+
+                </article>
+
+
+
+                <!-- TIEMPO -->
+
+                <article class="stat-card">
+
+
+                    <div class="stat-card-top">
+
+
+                        <div class="stat-icon stat-icon-green">
+
+                            <i class="bi bi-clock-fill"></i>
+
+                        </div>
+
+
+                        <span class="stat-badge">
+
+                            Estimado
+
+                        </span>
+
+
+                    </div>
+
+
+                    <div class="stat-content">
+
+                        <span class="stat-label">
+
+                            Tiempo de llegada
+
+                        </span>
+
+
+                        <h3 id="tiempo">
+
+                            5 min
+
+                        </h3>
+
+
+                        <p>
+
+                            Actualización en tiempo real
+
+                        </p>
+
+                    </div>
+
+
+                </article>
+
+
+
+                <!-- RUTA -->
+
+                <article class="stat-card">
+
+
+                    <div class="stat-card-top">
+
+
+                        <div class="stat-icon stat-icon-purple">
+
+                            <i class="bi bi-signpost-split-fill"></i>
+
+                        </div>
+
+
+                        <span class="stat-badge">
+
+                            Activa
+
+                        </span>
+
+
+                    </div>
+
+
+                    <div class="stat-content">
+
+                        <span class="stat-label">
+
+                            Ruta actual
+
+                        </span>
+
+
+                        <h3>
+
+                            Ruta 101
+
+                        </h3>
+
+
+                        <p>
+
+                            Línea verde
+
+                        </p>
+
+                    </div>
+
+
+                </article>
+
+
+
+                <!-- DISTANCIA -->
+
+                <article class="stat-card">
+
+
+                    <div class="stat-card-top">
+
+
+                        <div class="stat-icon stat-icon-orange">
+
+                            <i class="bi bi-geo-alt-fill"></i>
+
+                        </div>
+
+
+                        <span class="stat-badge">
+
+                            Cercano
+
+                        </span>
+
+
+                    </div>
+
+
+                    <div class="stat-content">
+
+                        <span class="stat-label">
+
+                            Distancia
+
+                        </span>
+
+
+                        <h3 id="distancia">
+
+                            Calculando...
+
+                        </h3>
+
+
+                        <p>
+
+                            Hasta tu parada
+
+                        </p>
+
+                    </div>
+
+
+                </article>
+
+
+            </section>
+
+                        <!-- ==========================================
+                    ZONA PRINCIPAL DEL MAPA
+            =========================================== -->
+
+            <section class="dashboard-main-grid">
+
+
+                <!-- ==========================================
+                        PANEL DE BÚSQUEDA
+                =========================================== -->
+
+                <aside class="route-search-card" id="rutas">
+
+
+                    <div class="panel-heading">
+
+                        <div>
+
+                            <span class="panel-label">
+                                PLANIFICAR VIAJE
+                            </span>
+
+                            <h2>
+                                Buscar una ruta
+                            </h2>
+
+                        </div>
+
+
+                        <div class="panel-heading-icon">
+
+                            <i class="bi bi-compass-fill"></i>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="route-form">
+
+
+                        <!-- ORIGEN -->
+
+                        <div class="route-field">
+
+                            <label for="origenRuta">
+
+                                <i class="bi bi-circle-fill origen-icon"></i>
+
+                                Origen
+
+                            </label>
+
+
+                            <div class="route-input">
+
+                                <i class="bi bi-geo-alt"></i>
+
+                                <input
+                                    type="text"
+                                    id="origenRuta"
+                                    placeholder="Tu ubicación actual"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- DESTINO -->
+
+                        <div class="route-field">
+
+                            <label for="destinoRuta">
+
+                                <i class="bi bi-geo-fill destino-icon"></i>
+
+                                Destino
+
+                            </label>
+
+
+                            <div class="route-input">
+
+                                <i class="bi bi-flag-fill"></i>
+
+                                <input
+                                    type="text"
+                                    id="destinoRuta"
+                                    placeholder="¿A dónde deseas ir?"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- INTERCAMBIAR -->
+
+                        <button
+                            class="route-swap-button"
+                            type="button"
+                            id="btnIntercambiarRuta"
+                            title="Intercambiar origen y destino"
+                        >
+
+                            <i class="bi bi-arrow-down-up"></i>
+
+                        </button>
+
+
+
+                        <!-- TIPO DE VIAJE -->
+
+                        <div class="route-options">
+
+
+                            <button
+                                type="button"
+                                class="route-option active"
+                                id="btnRutaRapida"
+                            >
+
+                                <i class="bi bi-lightning-charge-fill"></i>
+
+                                Más rápido
+
+                            </button>
+
+
+
+                            <button
+                                type="button"
+                                class="route-option"
+                                id="btnRutaEconomica"
+                            >
+
+                                <i class="bi bi-cash-coin"></i>
+
+                                Más económico
+
+                            </button>
+
+
+                        </div>
+
+
+
+                        <!-- BOTÓN BUSCAR -->
+
+                        <button
+                            type="button"
+                            class="btn-search-route"
+                            id="btnBuscarRuta"
+                        >
+
+                            <i class="bi bi-search"></i>
+
+                            Buscar ruta
+
+                        </button>
+
+
+                    </div>
+
+
+                    <!-- RUTA RECOMENDADA -->
+
+                    <div class="recommended-route" id="favoritos">
+
+
+                        <div class="recommended-route-header">
+
+                            <span>
+                                RUTA RECOMENDADA
+                            </span>
+
+                            <i class="bi bi-stars"></i>
+
+                        </div>
+
+
+
+                        <div class="recommended-route-main">
+
+
+                            <div class="route-number">
+
+                                101
+
+                            </div>
+
+
+
+                            <div class="recommended-route-info">
+
+                                <strong>
+
+                                    Ruta 101
+
+                                </strong>
+
+                                <span>
+
+                                    Centro Histórico
+
+                                </span>
+
+                            </div>
+
+
+
+                            <div class="recommended-route-time">
+
+                                <strong>
+
+                                    24 min
+
+                                </strong>
+
+                                <span>
+
+                                    Duración
+
+                                </span>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="recommended-route-footer">
+
+
+                            <div>
+
+                                <i class="bi bi-person-fill"></i>
+
+                                Moderado
+
+                            </div>
+
+
+                            <div>
+
+                                <i class="bi bi-clock-fill"></i>
+
+                                Próximo: 5 min
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </aside>
+
+
+
+                <!-- ==========================================
+                        CONTENEDOR PRINCIPAL MAPA
+                =========================================== -->
+
+                <section class="map-card" id="mapaSeccion">
+
+
+                    <!-- CABECERA MAPA -->
+
+                    <div class="map-card-header">
+
+
+                        <div>
+
+                            <span class="panel-label">
+
+                                SEGUIMIENTO EN TIEMPO REAL
+
+                            </span>
+
+
+                            <h2>
+
+                                Mapa inteligente ROUTIFY
+
+                            </h2>
+
+                        </div>
+
+
+
+                        <div class="map-header-actions">
+
+
+                            <button
+                                type="button"
+                                class="map-action-button"
+                                id="btnCentrarMapa"
+                                title="Centrar mapa"
+                            >
+
+                                <i class="bi bi-crosshair"></i>
+
+                            </button>
+
+
+
+                            <button
+                                type="button"
+                                class="map-action-button"
+                                id="btnPantallaCompleta"
+                                title="Pantalla completa"
+                            >
+
+                                <i class="bi bi-arrows-fullscreen"></i>
+
+                            </button>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- MAPA -->
+
+                    <div class="map-wrapper">
+
+
+                        <div id="mapa"></div>
+
+
+
+                        <!-- INDICADOR EN VIVO -->
+
+                        <div class="live-indicator">
+
+                            <span class="live-dot"></span>
+
+                            EN VIVO
+
+                        </div>
+
+
+
+                        <!-- LEYENDA -->
+
+                        <div class="map-legend">
+
+
+                            <div>
+
+                                <span class="legend-dot legend-bus"></span>
+
+                                Bus
+
+                            </div>
+
+
+                            <div>
+
+                                <span class="legend-dot legend-user"></span>
+
+                                Tu ubicación
+
+                            </div>
+
+
+                            <div>
+
+                                <span class="legend-dot legend-stop"></span>
+
+                                Parada
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </section>
+
+
+
+                <!-- ==========================================
+                        PANEL DERECHO
+                =========================================== -->
+
+                <aside class="right-dashboard-panel">
+
+
+                    <!-- ==========================================
+                            INFORMACIÓN DEL BUS
+                    =========================================== -->
+
+                    <section class="bus-status-card">
+
+
+                        <div class="panel-heading compact">
+
+
+                            <div>
+
+                                <span class="panel-label">
+
+                                    UNIDAD ACTUAL
+
+                                </span>
+
+
+                                <h2>
+
+                                    Bus 203
+
+                                </h2>
+
+                            </div>
+
+
+                            <span class="bus-status">
+
+                                <span></span>
+
+                                En movimiento
+
+                            </span>
+
+
+                        </div>
+
+
+
+                        <div class="bus-visual">
+
+
+                            <div class="bus-image-placeholder">
+
+                                <i class="bi bi-bus-front-fill"></i>
+
+                            </div>
+
+
+                            <div class="bus-route-badge">
+
+                                Ruta 101
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="bus-details-grid">
+
+
+                            <div class="bus-detail-item">
+
+                                <span>
+
+                                    Unidad
+
+                                </span>
+
+                                <strong>
+
+                                    B-025
+
+                                </strong>
+
+                            </div>
+
+
+
+                            <div class="bus-detail-item">
+
+                                <span>
+
+                                    Estado
+
+                                </span>
+
+                                <strong class="text-success-custom">
+
+                                    Activo
+
+                                </strong>
+
+                            </div>
+
+
+
+                            <div class="bus-detail-item">
+
+                                <span>
+
+                                    Distancia
+
+                                </span>
+
+                                <strong id="distanciaBus">
+
+                                    850 m
+
+                                </strong>
+
+                            </div>
+
+
+
+                            <div class="bus-detail-item">
+
+                                <span>
+
+                                    Llegada
+
+                                </span>
+
+                                <strong id="tiempoBus">
+
+                                    4 min
+
+                                </strong>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="next-stop-box">
+
+
+                            <div class="next-stop-icon">
+
+                                <i class="bi bi-geo-alt-fill"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>
+
+                                    Próxima parada
+
+                                </span>
+
+                                <strong id="proximaParada">
+
+                                    Centro Histórico
+
+                                </strong>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </section>
+
+
+
+                    <!-- ==========================================
+                            ALERTAS DEL MAPA
+                    =========================================== -->
+
+                    <section class="map-alerts-card">
+
+
+                        <div class="panel-heading compact">
+
+
+                            <div>
+
+                                <span class="panel-label">
+
+                                    NOTIFICACIONES
+
+                                </span>
+
+
+                                <h2>
+
+                                    Alertas recientes
+
+                                </h2>
+
+                            </div>
+
+
+                            <div class="alerts-counter">
+
+                                3
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div
+                            id="lista-alertas"
+                            class="alerts-list"
+                        >
+
+
+                            <div class="modern-alert alert-success-modern">
+
+
+                                <div class="modern-alert-icon">
+
+                                    <i class="bi bi-check-circle-fill"></i>
+
+                                </div>
+
+
+                                <div class="modern-alert-content">
+
+                                    <strong>
+
+                                        Sistema iniciado
+
+                                    </strong>
+
+                                    <span>
+
+                                        El seguimiento está activo.
+
+                                    </span>
+
+                                    <small>
+
+                                        Ahora
+
+                                    </small>
+
+                                </div>
+
+
+                            </div>
+
+
+
+                            <div class="modern-alert alert-warning-modern">
+
+
+                                <div class="modern-alert-icon">
+
+                                    <i class="bi bi-exclamation-triangle-fill"></i>
+
+                                </div>
+
+
+                                <div class="modern-alert-content">
+
+                                    <strong>
+
+                                        Tráfico moderado
+
+                                    </strong>
+
+                                    <span>
+
+                                        Posible demora de 3 minutos.
+
+                                    </span>
+
+                                    <small>
+
+                                        Hace 2 min
+
+                                    </small>
+
+                                </div>
+
+
+                            </div>
+
+
+
+                            <div class="modern-alert alert-info-modern">
+
+
+                                <div class="modern-alert-icon">
+
+                                    <i class="bi bi-bus-front-fill"></i>
+
+                                </div>
+
+
+                                <div class="modern-alert-content">
+
+                                    <strong>
+
+                                        Bus aproximándose
+
+                                    </strong>
+
+                                    <span>
+
+                                        La unidad está cerca de tu parada.
+
+                                    </span>
+
+                                    <small>
+
+                                        Hace 4 min
+
+                                    </small>
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    </section>
+
+
+                </aside>
+
+
+            </section>
+
+
+
+            <!-- ==========================================
+                    RESUMEN DEL VIAJE
+            =========================================== -->
+
+            <section class="trip-summary-card" id="misViajes">
+
+
+                <div class="trip-summary-header">
+
+
+                    <div class="trip-route-title">
+
+
+                        <div class="trip-route-icon">
+
+                            <i class="bi bi-bus-front-fill"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <span class="panel-label">
+
+                                VIAJE ACTUAL
+
+                            </span>
+
+                            <h2>
+
+                                Ruta 101
+
+                            </h2>
+
+                            <p>
+
+                                Línea verde · Centro Histórico
+
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="trip-status">
+
+                        <span></span>
+
+                        En horario
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="trip-progress">
+
+
+                    <div class="trip-progress-line">
+
+                        <span class="trip-progress-fill"></span>
+
+                    </div>
+
+
+
+                    <div class="trip-stop completed">
+
+
+                        <div class="trip-stop-point">
+
+                            <i class="bi bi-check-lg"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+
+                                Inicio
+
+                            </strong>
+
+                            <span>
+
+                                Terminal Norte
+
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="trip-stop active">
+
+
+                        <div class="trip-stop-point">
+
+                            <i class="bi bi-bus-front-fill"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+
+                                Bus actual
+
+                            </strong>
+
+                            <span>
+
+                                En recorrido
+
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="trip-stop">
+
+
+                        <div class="trip-stop-point">
+
+                            <i class="bi bi-geo-alt-fill"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+
+                                Próxima parada
+
+                            </strong>
+
+                            <span>
+
+                                Centro Histórico
+
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="trip-stop">
+
+
+                        <div class="trip-stop-point">
+
+                            <i class="bi bi-flag-fill"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+
+                                Destino
+
+                            </strong>
+
+                            <span>
+
+                                Zona 10
+
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- ==========================================
+                    INFORMACIÓN ADICIONAL
+            =========================================== -->
+
+            <section class="bottom-dashboard-grid">
+
+
+                <!-- ESTADÍSTICAS DEL VIAJE -->
+
+                <article class="bottom-card">
+
+
+                    <div class="bottom-card-title">
+
+                        <i class="bi bi-activity"></i>
+
+                        <div>
+
+                            <span>
+
+                                INFORMACIÓN
+
+                            </span>
+
+                            <h3>
+
+                                Detalles del recorrido
+
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="journey-details">
+
+
+                        <div class="journey-detail">
+
+                            <i class="bi bi-clock-history"></i>
+
+                            <div>
+
+                                <span>
+
+                                    Duración estimada
+
+                                </span>
+
+                                <strong>
+
+                                    24 minutos
+
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="journey-detail">
+
+                            <i class="bi bi-signpost-2-fill"></i>
+
+                            <div>
+
+                                <span>
+
+                                    Distancia total
+
+                                </span>
+
+                                <strong>
+
+                                    8.6 km
+
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="journey-detail">
+
+                            <i class="bi bi-geo-alt-fill"></i>
+
+                            <div>
+
+                                <span>
+
+                                    Paradas restantes
+
+                                </span>
+
+                                <strong>
+
+                                    6 paradas
+
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                </article>
+
+
+
+                <!-- ALERTAS DEL RECORRIDO -->
+
+                <article class="bottom-card" id="alertasSeccion">
+
+
+                    <div class="bottom-card-title">
+
+                        <i class="bi bi-bell-fill"></i>
+
+                        <div>
+
+                            <span>
+
+                                ACTIVIDAD
+
+                            </span>
+
+                            <h3>
+
+                                Alertas del recorrido
+
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div id="alertasPasajero">
+
+                        <!--
+                            Aquí tu JavaScript puede agregar
+                            alertas dinámicamente.
+                        -->
+
+                    </div>
+
+
+                </article>
+
+
+            </section>
+
+
+
+
+
+            <!-- ==========================================
+                    MI PERFIL
+            =========================================== -->
+
+            <section class="passenger-account-grid" id="perfilSeccion">
+                <article class="map-card passenger-account-card">
+                    <div class="map-header">
+                        <div>
+                            <span class="section-kicker">CUENTA</span>
+                            <h2>Mi perfil</h2>
+                        </div>
+                        <i class="bi bi-person-circle"></i>
+                    </div>
+                    <div class="passenger-profile-data">
+                        <div><span>Nombre</span><strong id="perfilNombre">Pasajero</strong></div>
+                        <div><span>Correo</span><strong id="perfilCorreo">Sin información</strong></div>
+                        <div><span>Teléfono</span><strong id="perfilTelefono">Sin información</strong></div>
+                    </div>
+                </article>
+            </section>
+
+            <!-- ==========================================
+                    CONFIGURACIÓN
+            =========================================== -->
+
+            <section class="passenger-account-grid" id="configuracionSeccion">
+                <article class="map-card passenger-account-card">
+                    <div class="map-header">
+                        <div>
+                            <span class="section-kicker">PREFERENCIAS</span>
+                            <h2>Configuración</h2>
+                        </div>
+                        <i class="bi bi-gear-fill"></i>
+                    </div>
+                    <div class="passenger-settings-list">
+                        <label class="passenger-setting-item">
+                            <span><i class="bi bi-bell-fill"></i> Notificaciones</span>
+                            <input type="checkbox" id="configNotificacionesPasajero" checked>
+                        </label>
+                        <label class="passenger-setting-item">
+                            <span><i class="bi bi-bus-front-fill"></i> Alertas del bus</span>
+                            <input type="checkbox" id="configAlertasBus" checked>
+                        </label>
+                        <label class="passenger-setting-item">
+                            <span><i class="bi bi-moon-stars-fill"></i> Tema oscuro</span>
+                            <input type="checkbox" id="configTemaPasajero" checked>
+                        </label>
+                        <label class="passenger-setting-item">
+                            <span><i class="bi bi-crosshair"></i> Centrar mapa automáticamente</span>
+                            <input type="checkbox" id="configCentrarMapa">
+                        </label>
+                    </div>
+                    <button type="button" class="btn-search-route" id="btnGuardarConfigPasajero">
+                        <i class="bi bi-check2-circle"></i>
+                        Guardar configuración
+                    </button>
+                </article>
+            </section>
+
+
+            <!-- ==========================================
+                    CONTENEDOR JS INFORMACIÓN BUS
+            =========================================== -->
+
+            <div
+                id="infoBus"
+                class="info-bus-dinamica"
+            ></div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- ==========================================
+        LEAFLET
+=========================================== -->
+
+<script
+    src="https://unpkg.com/leaflet/dist/leaflet.js">
+</script>
+
+
+
+<!-- ==========================================
+        JAVASCRIPT ROUTIFY
+=========================================== -->
+<script src="js/sesion-pasajero.js"></script>
+
+<script src="js/mapa-real.js"></script>
+
+<script src="js/rutas-pasajero.js"></script>
+
+<script src="js/sidebar-pasajero.js"></script>
+
+<script src="js/header-pasajero.js"></script>
+
+<script src="js/dashboard-pasajero.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,2002 @@
+/* ==========================================================
+   ROUTIFY V2
+   REGISTRO DE CONDUCTOR
+========================================================== */
+
+
+/* ==========================================================
+   1. VARIABLES
+========================================================== */
+
+:root{
+
+    --bg-primary:#020c16;
+    --bg-secondary:#04111f;
+    --bg-card:#061a2c;
+
+    --blue:#1267ff;
+    --blue-light:#3b82f6;
+
+    --cyan:#22d3ee;
+
+    --green:#22e39a;
+    --green-dark:#10b981;
+
+    --white:#ffffff;
+
+    --text-primary:#f8fafc;
+    --text-secondary:#94a3b8;
+    --text-muted:#64748b;
+
+    --border:rgba(148,163,184,.15);
+
+    --shadow:
+        0 25px 70px rgba(0,0,0,.35);
+
+}
+
+
+/* ==========================================================
+   2. RESET
+========================================================== */
+
+*{
+
+    margin:0;
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+
+body{
+
+    min-height:100vh;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    background:
+        var(--bg-primary);
+
+    color:
+        var(--text-primary);
+
+    overflow-x:hidden;
+
+}
+
+
+button,
+input,
+select{
+
+    font:inherit;
+
+}
+
+
+button,
+a{
+
+    -webkit-tap-highlight-color:
+        transparent;
+
+}
+
+
+a{
+
+    text-decoration:none;
+
+}
+
+
+/* ==========================================================
+   3. FONDO GENERAL
+========================================================== */
+
+.driver-background{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:-10;
+
+    overflow:hidden;
+
+    background:
+
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(18,103,255,.12),
+            transparent 32%
+        ),
+
+        radial-gradient(
+            circle at 85% 70%,
+            rgba(34,227,154,.08),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            135deg,
+            #020c16,
+            #04111f 55%,
+            #020b13
+        );
+
+}
+
+
+.background-grid{
+
+    position:absolute;
+
+    inset:0;
+
+    opacity:.18;
+
+    background-image:
+
+        linear-gradient(
+            rgba(255,255,255,.035) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.035) 1px,
+            transparent 1px
+        );
+
+    background-size:
+        45px 45px;
+
+}
+
+
+.background-light{
+
+    position:absolute;
+
+    width:500px;
+    height:500px;
+
+    border-radius:50%;
+
+    filter:
+        blur(120px);
+
+    opacity:.14;
+
+}
+
+
+.light-blue{
+
+    top:-220px;
+    left:-170px;
+
+    background:
+        var(--blue);
+
+}
+
+
+.light-green{
+
+    right:-220px;
+    bottom:-250px;
+
+    background:
+        var(--green);
+
+}
+
+
+/* ==========================================================
+   4. NAVBAR
+========================================================== */
+
+.driver-navbar{
+
+    position:relative;
+
+    width:100%;
+
+    height:82px;
+
+    display:flex;
+    align-items:center;
+
+    border-bottom:
+        1px solid var(--border);
+
+    background:
+        rgba(2,12,22,.75);
+
+    backdrop-filter:
+        blur(18px);
+
+    z-index:100;
+
+}
+
+
+.driver-navbar-container{
+
+    width:min(1400px,92%);
+
+    margin:auto;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+}
+
+
+/* ==========================================================
+   5. LOGO
+========================================================== */
+
+.brand{
+
+    display:flex;
+    align-items:center;
+
+    gap:12px;
+
+    color:
+        var(--white);
+
+}
+
+
+.brand-icon{
+
+    width:45px;
+    height:45px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:14px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            var(--blue),
+            var(--cyan)
+        );
+
+    box-shadow:
+
+        0 10px 30px
+        rgba(18,103,255,.25);
+
+    font-size:21px;
+
+}
+
+
+.brand-text{
+
+    display:flex;
+    flex-direction:column;
+
+    line-height:1;
+
+}
+
+
+.brand-text strong{
+
+    font-size:20px;
+
+    letter-spacing:1.5px;
+
+}
+
+
+.brand-text span{
+
+    margin-top:6px;
+
+    font-size:9px;
+
+    letter-spacing:2.2px;
+
+    color:
+        var(--text-secondary);
+
+}
+
+
+/* ==========================================================
+   6. BOTÓN VOLVER
+========================================================== */
+
+.btn-back{
+
+    min-height:44px;
+
+    padding:
+        0 18px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:9px;
+
+    color:
+        var(--text-secondary);
+
+    border:
+        1px solid var(--border);
+
+    border-radius:12px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    transition:
+        .25s ease;
+
+}
+
+
+.btn-back:hover{
+
+    color:
+        var(--white);
+
+    border-color:
+        rgba(34,211,238,.4);
+
+    background:
+        rgba(34,211,238,.06);
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+/* ==========================================================
+   7. CONTENIDO PRINCIPAL
+========================================================== */
+
+.driver-main{
+
+    width:100%;
+
+    padding:
+        55px 0;
+
+}
+
+
+.driver-container{
+
+    width:min(1400px,92%);
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:
+        .95fr 1.05fr;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        28px;
+
+    overflow:hidden;
+
+    background:
+        rgba(4,17,31,.76);
+
+    backdrop-filter:
+        blur(22px);
+
+    box-shadow:
+        var(--shadow);
+
+}
+
+
+/* ==========================================================
+   8. PANEL VISUAL IZQUIERDO
+========================================================== */
+
+.driver-visual-section{
+
+    position:relative;
+
+    min-height:850px;
+
+    padding:
+        65px;
+
+    display:flex;
+    align-items:center;
+
+    overflow:hidden;
+
+    border-right:
+        1px solid var(--border);
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(18,103,255,.12),
+            rgba(34,227,154,.035)
+        ),
+
+        #03101d;
+
+}
+
+
+.visual-grid{
+
+    position:absolute;
+
+    inset:0;
+
+    opacity:.22;
+
+    background-image:
+
+        linear-gradient(
+            rgba(255,255,255,.035) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.035) 1px,
+            transparent 1px
+        );
+
+    background-size:
+        38px 38px;
+
+}
+
+
+.visual-glow{
+
+    position:absolute;
+
+    width:450px;
+    height:450px;
+
+    top:100px;
+    left:50%;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(
+            circle,
+            rgba(18,103,255,.18),
+            rgba(34,211,238,.06),
+            transparent 68%
+        );
+
+    filter:
+        blur(20px);
+
+}
+
+
+.driver-showcase{
+
+    position:relative;
+
+    width:100%;
+
+    z-index:2;
+
+}
+
+
+/* ==========================================================
+   9. ILUSTRACIÓN CONDUCTOR
+========================================================== */
+
+.driver-illustration{
+
+    position:relative;
+
+    width:250px;
+    height:250px;
+
+    margin:
+        0 auto 45px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+}
+
+
+.illustration-ring{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    border:
+        1px solid rgba(34,211,238,.15);
+
+}
+
+
+.ring-one{
+
+    width:250px;
+    height:250px;
+
+}
+
+
+.ring-two{
+
+    width:195px;
+    height:195px;
+
+    border-color:
+        rgba(18,103,255,.22);
+
+}
+
+
+.ring-three{
+
+    width:140px;
+    height:140px;
+
+    border-color:
+        rgba(34,227,154,.25);
+
+}
+
+
+.driver-main-icon{
+
+    position:relative;
+
+    width:105px;
+    height:105px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:30px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(18,103,255,.95),
+            rgba(34,211,238,.85)
+        );
+
+    box-shadow:
+
+        0 0 60px
+        rgba(18,103,255,.25);
+
+    font-size:48px;
+
+    color:
+        var(--white);
+
+    z-index:5;
+
+}
+
+
+.floating-icon{
+
+    position:absolute;
+
+    width:47px;
+    height:47px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border:
+        1px solid rgba(255,255,255,.12);
+
+    border-radius:15px;
+
+    background:
+        rgba(6,26,44,.92);
+
+    box-shadow:
+        0 15px 30px rgba(0,0,0,.25);
+
+    font-size:19px;
+
+}
+
+
+.floating-bus{
+
+    top:20px;
+    right:20px;
+
+    color:
+        var(--cyan);
+
+}
+
+
+.floating-location{
+
+    bottom:15px;
+    left:20px;
+
+    color:
+        var(--green);
+
+}
+
+
+.floating-shield{
+
+    right:0;
+    bottom:45px;
+
+    color:
+        var(--blue-light);
+
+}
+
+
+/* ==========================================================
+   10. ETIQUETA
+========================================================== */
+
+.visual-label{
+
+    display:flex;
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:20px;
+
+    font-size:11px;
+    font-weight:700;
+
+    letter-spacing:2px;
+
+    color:
+        var(--green);
+
+}
+
+
+.visual-label span{
+
+    width:8px;
+    height:8px;
+
+    border-radius:50%;
+
+    background:
+        var(--green);
+
+    box-shadow:
+
+        0 0 15px
+        rgba(34,227,154,.8);
+
+}
+
+
+/* ==========================================================
+   11. TÍTULO VISUAL
+========================================================== */
+
+.driver-showcase h1{
+
+    max-width:520px;
+
+    font-size:
+        clamp(38px,4vw,58px);
+
+    line-height:1.06;
+
+    letter-spacing:-2px;
+
+}
+
+
+.driver-showcase h1 span{
+
+    display:block;
+
+    margin-top:5px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            var(--cyan),
+            var(--green)
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+
+}
+
+
+.visual-description{
+
+    max-width:550px;
+
+    margin-top:22px;
+
+    color:
+        var(--text-secondary);
+
+    font-size:15px;
+
+    line-height:1.8;
+
+}
+
+
+/* ==========================================================
+   12. BENEFICIOS
+========================================================== */
+
+.driver-benefits{
+
+    margin-top:38px;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:14px;
+
+}
+
+
+.benefit-card{
+
+    min-height:88px;
+
+    padding:16px;
+
+    display:flex;
+    align-items:center;
+
+    gap:13px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:17px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    transition:
+        .25s ease;
+
+}
+
+
+.benefit-card:hover{
+
+    border-color:
+        rgba(34,211,238,.25);
+
+    background:
+        rgba(34,211,238,.04);
+
+    transform:
+        translateY(-3px);
+
+}
+
+
+.benefit-icon{
+
+    flex:
+        0 0 42px;
+
+    width:42px;
+    height:42px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:12px;
+
+    color:
+        var(--cyan);
+
+    background:
+        rgba(34,211,238,.08);
+
+}
+
+
+.benefit-card strong{
+
+    display:block;
+
+    margin-bottom:5px;
+
+    font-size:13px;
+
+}
+
+
+.benefit-card span{
+
+    color:
+        var(--text-secondary);
+
+    font-size:11px;
+
+    line-height:1.5;
+
+}
+
+
+/* ==========================================================
+   13. ESTADO PLATAFORMA
+========================================================== */
+
+.platform-status{
+
+    margin-top:30px;
+
+    padding:
+        16px 18px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    border:
+        1px solid rgba(34,227,154,.15);
+
+    border-radius:16px;
+
+    background:
+        rgba(34,227,154,.04);
+
+}
+
+
+.status-left{
+
+    display:flex;
+    align-items:center;
+
+    gap:12px;
+
+}
+
+
+.status-dot{
+
+    width:9px;
+    height:9px;
+
+    border-radius:50%;
+
+    background:
+        var(--green);
+
+    box-shadow:
+
+        0 0 15px
+        rgba(34,227,154,.7);
+
+}
+
+
+.status-left strong{
+
+    display:block;
+
+    font-size:12px;
+
+}
+
+
+.status-left span{
+
+    display:block;
+
+    margin-top:4px;
+
+    color:
+        var(--text-secondary);
+
+    font-size:10px;
+
+}
+
+
+.platform-status > i{
+
+    color:
+        var(--green);
+
+    font-size:21px;
+
+}
+
+
+/* ==========================================================
+   14. SECCIÓN FORMULARIO
+========================================================== */
+
+.driver-form-section{
+
+    padding:
+        60px 70px;
+
+    display:flex;
+    align-items:center;
+
+    background:
+        rgba(2,12,22,.45);
+
+}
+
+
+.driver-form-wrapper{
+
+    width:100%;
+
+    max-width:650px;
+
+    margin:auto;
+
+}
+
+
+/* ==========================================================
+   15. CABECERA FORMULARIO
+========================================================== */
+
+.form-label{
+
+    display:inline-flex;
+    align-items:center;
+
+    gap:8px;
+
+    margin-bottom:17px;
+
+    color:
+        var(--cyan);
+
+    font-size:11px;
+    font-weight:700;
+
+    letter-spacing:1.8px;
+
+}
+
+
+.form-header h2{
+
+    font-size:
+        clamp(34px,3vw,46px);
+
+    line-height:1.08;
+
+    letter-spacing:-1.5px;
+
+}
+
+
+.form-header h2 span{
+
+    color:
+        var(--green);
+
+}
+
+
+.form-header p{
+
+    max-width:530px;
+
+    margin-top:14px;
+
+    color:
+        var(--text-secondary);
+
+    font-size:14px;
+
+    line-height:1.7;
+
+}
+
+
+/* ==========================================================
+   16. FORMULARIO
+========================================================== */
+
+#formRegistroConductor{
+
+    margin-top:35px;
+
+}
+
+
+.form-group{
+
+    width:100%;
+
+    margin-bottom:20px;
+
+}
+
+
+.form-group label{
+
+    display:block;
+
+    margin-bottom:9px;
+
+    color:
+        #cbd5e1;
+
+    font-size:12px;
+    font-weight:600;
+
+}
+
+
+.form-row{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:16px;
+
+}
+
+
+/* ==========================================================
+   17. INPUTS
+========================================================== */
+
+.input-container{
+
+    position:relative;
+
+    width:100%;
+
+    height:54px;
+
+    display:flex;
+    align-items:center;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:14px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    transition:
+        .25s ease;
+
+}
+
+
+.input-container:focus-within{
+
+    border-color:
+        rgba(34,211,238,.55);
+
+    background:
+        rgba(34,211,238,.035);
+
+    box-shadow:
+
+        0 0 0 3px
+        rgba(34,211,238,.05);
+
+}
+
+
+.input-icon{
+
+    width:48px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:
+        var(--text-muted);
+
+    font-size:16px;
+
+}
+
+
+.input-container:focus-within
+.input-icon{
+
+    color:
+        var(--cyan);
+
+}
+
+
+.input-container input,
+.input-container select{
+
+    width:100%;
+    height:100%;
+
+    padding:
+        0 14px 0 0;
+
+    border:none;
+    outline:none;
+
+    color:
+        var(--white);
+
+    background:
+        transparent;
+
+    font-size:13px;
+
+}
+
+
+.input-container input::placeholder{
+
+    color:
+        #526174;
+
+}
+
+
+.input-container select{
+
+    appearance:none;
+
+    cursor:pointer;
+
+}
+
+
+.input-container select option{
+
+    color:
+        var(--white);
+
+    background:
+        #061a2c;
+
+}
+
+
+/* ==========================================================
+   18. SELECT
+========================================================== */
+
+.select-container select{
+
+    padding-right:45px;
+
+}
+
+
+.select-arrow{
+
+    position:absolute;
+
+    right:17px;
+
+    pointer-events:none;
+
+    color:
+        var(--text-muted);
+
+    font-size:12px;
+
+}
+
+
+/* ==========================================================
+   19. MOSTRAR CONTRASEÑA
+========================================================== */
+
+.toggle-password{
+
+    width:45px;
+    height:100%;
+
+    flex-shrink:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border:none;
+
+    color:
+        var(--text-muted);
+
+    background:
+        transparent;
+
+    cursor:pointer;
+
+    transition:
+        .2s ease;
+
+}
+
+
+.toggle-password:hover{
+
+    color:
+        var(--cyan);
+
+}
+
+
+/* ==========================================================
+   20. MENSAJES DE VALIDACIÓN
+========================================================== */
+
+.input-message{
+
+    min-height:15px;
+
+    display:block;
+
+    margin-top:6px;
+
+    color:
+        #fb7185;
+
+    font-size:10px;
+
+}
+
+
+.form-group.error
+.input-container{
+
+    border-color:
+        rgba(251,113,133,.65);
+
+}
+
+
+.form-group.success
+.input-container{
+
+    border-color:
+        rgba(34,227,154,.45);
+
+}
+
+
+/* ==========================================================
+   21. TÉRMINOS
+========================================================== */
+
+.terms-container{
+
+    display:flex;
+    align-items:flex-start;
+
+    gap:11px;
+
+    margin:
+        6px 0 22px;
+
+    cursor:pointer;
+
+}
+
+
+.terms-container input{
+
+    display:none;
+
+}
+
+
+.custom-checkbox{
+
+    flex:
+        0 0 20px;
+
+    width:20px;
+    height:20px;
+
+    margin-top:1px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:6px;
+
+    color:
+        transparent;
+
+    background:
+        rgba(255,255,255,.03);
+
+    transition:
+        .2s ease;
+
+}
+
+
+.terms-container input:checked
++
+.custom-checkbox{
+
+    color:
+        #02120d;
+
+    border-color:
+        var(--green);
+
+    background:
+        var(--green);
+
+}
+
+
+.terms-text{
+
+    color:
+        var(--text-secondary);
+
+    font-size:11px;
+
+    line-height:1.6;
+
+}
+
+
+.terms-text a{
+
+    color:
+        var(--cyan);
+
+}
+
+
+/* ==========================================================
+   22. MENSAJE GENERAL
+========================================================== */
+
+.form-message{
+
+    display:none;
+
+    margin-bottom:18px;
+
+    padding:
+        12px 15px;
+
+    border-radius:12px;
+
+    font-size:12px;
+
+    line-height:1.5;
+
+}
+
+
+.form-message.error{
+
+    display:block;
+
+    color:
+        #fecdd3;
+
+    border:
+        1px solid rgba(251,113,133,.2);
+
+    background:
+        rgba(251,113,133,.08);
+
+}
+
+
+.form-message.success{
+
+    display:block;
+
+    color:
+        #a7f3d0;
+
+    border:
+        1px solid rgba(34,227,154,.2);
+
+    background:
+        rgba(34,227,154,.08);
+
+}
+
+
+/* ==========================================================
+   23. BOTÓN REGISTRO
+========================================================== */
+
+.btn-register-driver{
+
+    position:relative;
+
+    width:100%;
+    height:56px;
+
+    padding:
+        0 20px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:12px;
+
+    overflow:hidden;
+
+    border:none;
+
+    border-radius:14px;
+
+    color:
+        #03110d;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            var(--green),
+            var(--cyan)
+        );
+
+    box-shadow:
+
+        0 15px 35px
+        rgba(34,227,154,.13);
+
+    font-size:13px;
+    font-weight:800;
+
+    cursor:pointer;
+
+    transition:
+        .25s ease;
+
+}
+
+
+.btn-register-driver:hover{
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+
+        0 18px 40px
+        rgba(34,227,154,.2);
+
+}
+
+
+.btn-register-driver i{
+
+    transition:
+        .25s ease;
+
+}
+
+
+.btn-register-driver:hover i{
+
+    transform:
+        translateX(4px);
+
+}
+
+
+.btn-register-driver:disabled{
+
+    opacity:.6;
+
+    cursor:not-allowed;
+
+    transform:none;
+
+}
+
+
+/* ==========================================================
+   24. NOTA DE SEGURIDAD
+========================================================== */
+
+.security-note{
+
+    margin-top:22px;
+
+    padding:15px;
+
+    display:flex;
+    align-items:flex-start;
+
+    gap:12px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:14px;
+
+    background:
+        rgba(255,255,255,.02);
+
+}
+
+
+.security-icon{
+
+    flex:
+        0 0 36px;
+
+    width:36px;
+    height:36px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:10px;
+
+    color:
+        var(--green);
+
+    background:
+        rgba(34,227,154,.07);
+
+}
+
+
+.security-note strong{
+
+    display:block;
+
+    margin-bottom:4px;
+
+    font-size:11px;
+
+}
+
+
+.security-note span{
+
+    display:block;
+
+    color:
+        var(--text-secondary);
+
+    font-size:10px;
+
+    line-height:1.5;
+
+}
+
+
+/* ==========================================================
+   25. VOLVER A SELECCIÓN
+========================================================== */
+
+.selection-link{
+
+    margin-top:25px;
+
+    text-align:center;
+
+    color:
+        var(--text-secondary);
+
+    font-size:11px;
+
+}
+
+
+.selection-link span{
+
+    margin-right:5px;
+
+}
+
+
+.selection-link a{
+
+    color:
+        var(--cyan);
+
+    font-weight:600;
+
+}
+
+
+.selection-link a i{
+
+    margin-left:4px;
+
+    font-size:10px;
+
+}
+
+
+/* ==========================================================
+   26. FOOTER
+========================================================== */
+
+.driver-footer{
+
+    width:min(1400px,92%);
+
+    min-height:75px;
+
+    margin:auto;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    color:
+        var(--text-muted);
+
+    font-size:10px;
+
+}
+
+
+.driver-footer div{
+
+    display:flex;
+
+    gap:22px;
+
+}
+
+
+.driver-footer a{
+
+    color:
+        var(--text-muted);
+
+    transition:
+        .2s ease;
+
+}
+
+
+.driver-footer a:hover{
+
+    color:
+        var(--cyan);
+
+}
+
+
+/* ==========================================================
+   27. RESPONSIVE
+========================================================== */
+
+@media(max-width:1100px){
+
+    .driver-container{
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .driver-visual-section{
+
+        min-height:auto;
+
+        padding:
+            55px;
+
+        border-right:none;
+
+        border-bottom:
+            1px solid var(--border);
+
+    }
+
+
+    .driver-illustration{
+
+        width:210px;
+        height:210px;
+
+    }
+
+
+    .ring-one{
+
+        width:210px;
+        height:210px;
+
+    }
+
+
+    .ring-two{
+
+        width:165px;
+        height:165px;
+
+    }
+
+
+    .ring-three{
+
+        width:120px;
+        height:120px;
+
+    }
+
+}
+
+
+@media(max-width:700px){
+
+    .driver-navbar{
+
+        height:72px;
+
+    }
+
+
+    .brand-text span{
+
+        display:none;
+
+    }
+
+
+    .btn-back span{
+
+        display:none;
+
+    }
+
+
+    .btn-back{
+
+        width:44px;
+
+        padding:0;
+
+    }
+
+
+    .driver-main{
+
+        padding:
+            25px 0;
+
+    }
+
+
+    .driver-container{
+
+        width:94%;
+
+        border-radius:20px;
+
+    }
+
+
+    .driver-visual-section{
+
+        padding:
+            40px 25px;
+
+    }
+
+
+    .driver-illustration{
+
+        width:180px;
+        height:180px;
+
+        margin-bottom:35px;
+
+    }
+
+
+    .ring-one{
+
+        width:180px;
+        height:180px;
+
+    }
+
+
+    .ring-two{
+
+        width:140px;
+        height:140px;
+
+    }
+
+
+    .ring-three{
+
+        width:105px;
+        height:105px;
+
+    }
+
+
+    .driver-main-icon{
+
+        width:85px;
+        height:85px;
+
+        border-radius:24px;
+
+        font-size:38px;
+
+    }
+
+
+    .floating-icon{
+
+        width:40px;
+        height:40px;
+
+        font-size:16px;
+
+    }
+
+
+    .driver-benefits{
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .driver-form-section{
+
+        padding:
+            45px 25px;
+
+    }
+
+
+    .form-row{
+
+        grid-template-columns:
+            1fr;
+
+        gap:0;
+
+    }
+
+
+    .driver-footer{
+
+        padding:
+            20px 0;
+
+        flex-direction:column;
+
+        justify-content:center;
+
+        gap:14px;
+
+    }
+
+}
+
+
+@media(max-width:450px){
+
+    .driver-showcase h1{
+
+        font-size:35px;
+
+    }
+
+
+    .form-header h2{
+
+        font-size:32px;
+
+    }
+
+
+    .driver-form-section{
+
+        padding:
+            38px 18px;
+
+    }
+
+
+    .driver-visual-section{
+
+        padding:
+            35px 18px;
+
+    }
+
+
+    .driver-footer div{
+
+        gap:14px;
+
+    }
+
+}

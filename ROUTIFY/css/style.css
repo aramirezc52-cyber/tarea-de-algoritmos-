@@ -1,0 +1,1233 @@
+/*=================================
+        ROUTIFY
+==================================*/
+
+/* VARIABLES DE COLORES */
+
+:root{
+
+    --azul:#0D47A1;
+    --azulClaro:#1976D2;
+    --verde:#2E7D32;
+    --verdeClaro:#43A047;
+    --blanco:#FFFFFF;
+    --gris:#F4F8FB;
+    --texto:#263238;
+
+}
+
+
+/* CONFIGURACIÓN GENERAL */
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+}
+
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+
+body{
+
+    font-family:'Segoe UI',sans-serif;
+    color:var(--texto);
+    background:var(--gris);
+
+}
+
+
+/*=================================
+        NAVBAR PREMIUM
+==================================*/
+
+
+.navbar{
+
+    padding:18px 0;
+    border-bottom:1px solid rgba(255,255,255,.15);
+    backdrop-filter:blur(12px);
+    background:rgba(8,37,103,.85);
+    transition:
+        background .35s ease,
+        padding .35s ease,
+        box-shadow .35s ease;    
+}
+
+
+.navbar-brand{
+
+    color:white;
+    font-size:28px;
+    font-weight:800;
+    letter-spacing:1px;
+
+}
+
+
+.navbar-brand:hover{
+
+    color:white;
+
+}
+
+
+.navbar-brand i{
+
+    color:var(--verdeClaro);
+    margin-right:8px;
+
+}
+
+
+.nav-link{
+
+    color:white;
+    font-weight:600;
+    margin-left:20px;
+    position:relative;
+    transition:.3s;
+
+}
+
+
+.nav-link::after{
+
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-5px;
+    width:0;
+    height:3px;
+    background:var(--verdeClaro);
+    transition:.3s;
+
+}
+
+
+.nav-link:hover::after{
+
+    width:100%;
+
+}
+
+
+.nav-link:hover{
+
+    color:white;
+
+}
+
+
+.btn-login{
+
+    background:var(--verdeClaro);
+    color:white;
+    border-radius:40px;
+    padding:12px 28px;
+    font-weight:bold;
+    transition:.3s;
+
+}
+
+
+.btn-login:hover{
+
+    background:var(--verde);
+    color:white;
+    transform:translateY(-3px);
+    box-shadow:0 10px 20px rgba(0,0,0,.25);
+
+}
+
+
+
+/*=================================
+            HERO
+==================================*/
+
+
+.hero{
+
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    background:linear-gradient(
+        135deg,
+        #082567 0%,
+        #1565C0 55%,
+        #2E7D32 100%
+    );
+    color:white;
+    position:relative;
+    overflow:hidden;
+
+}
+
+
+
+.hero-etiqueta{
+
+    display:inline-block;
+    background:rgba(255,255,255,.15);
+    backdrop-filter:blur(10px);
+    padding:10px 18px;
+    border-radius:30px;
+    margin-bottom:25px;
+    font-weight:600;
+
+}
+
+
+
+.hero h1{
+
+    font-size:58px;
+    font-weight:800;
+    line-height:1.2;
+    margin-bottom:25px;
+
+}
+
+
+
+.hero p{
+
+    font-size:20px;
+    color:#E3F2FD;
+    margin-bottom:35px;
+    line-height:1.8;
+
+}
+
+
+
+.hero-botones{
+
+    display:flex;
+    gap:20px;
+
+}
+
+
+
+.hero .btn-success{
+
+    background:var(--verdeClaro);
+    border:none;
+    padding:14px 35px;
+    border-radius:50px;
+    font-weight:bold;
+    transition:.3s;
+
+}
+
+
+
+.hero .btn-success:hover{
+
+    transform:translateY(-4px);
+    box-shadow:0 12px 25px rgba(0,0,0,.25);
+
+}
+
+
+
+.hero-img{
+
+    max-width:100%;
+    width:520px;
+    animation:flotar 4s ease-in-out infinite;
+
+}
+
+
+
+@keyframes flotar{
+
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-15px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+
+}
+
+/*=================================
+        ESTADÍSTICAS
+==================================*/
+
+
+.estadisticas{
+
+    margin-top:-70px;
+    position:relative;
+    z-index:10;
+    padding-bottom:80px;
+
+}
+
+
+
+.stat-card{
+
+    background:white;
+    border-radius:22px;
+    padding:35px 25px;
+    box-shadow:0 20px 45px rgba(0,0,0,.08);
+    transition:.35s;
+    height:100%;
+    text-align:center;
+
+}
+
+
+
+.stat-card:hover{
+
+    transform:translateY(-12px);
+    box-shadow:0 25px 55px rgba(0,0,0,.15);
+
+}
+
+
+
+.stat-card i{
+
+    font-size:55px;
+    color:var(--azulClaro);
+    margin-bottom:20px;
+
+}
+
+
+
+.stat-card h2{
+
+    font-size:42px;
+    font-weight:800;
+    color:var(--azul);
+
+}
+
+
+
+.stat-card p{
+
+    color:#666;
+    font-size:17px;
+    margin-top:10px;
+
+}
+
+
+
+/*=================================
+        LINEA DECORATIVA
+==================================*/
+
+
+.linea{
+
+    width:70px;
+    height:4px;
+    background:var(--verdeClaro);
+    border-radius:20px;
+    margin:25px auto;
+
+}
+
+
+
+/*=================================
+        SERVICIOS PREMIUM
+==================================*/
+
+
+.servicios{
+
+    padding:100px 0;
+    background:#F7FAFC;
+
+}
+
+
+
+.titulo-seccion{
+
+    text-align:center;
+    margin-bottom:70px;
+
+}
+
+
+
+.titulo-seccion span{
+
+    color:var(--verdeClaro);
+    font-weight:bold;
+    text-transform:uppercase;
+    letter-spacing:2px;
+
+}
+
+
+
+.titulo-seccion h2{
+
+    margin-top:15px;
+    font-size:46px;
+    font-weight:800;
+    color:#082567;
+
+}
+
+
+
+.titulo-seccion p{
+
+    max-width:700px;
+    margin:20px auto 0;
+    color:#666;
+    font-size:18px;
+
+}
+
+
+
+.servicio-card{
+
+    background:white;
+    border-radius:22px;
+    padding:40px 30px;
+    height:100%;
+    min-height:390px;
+    transition:.4s;
+    box-shadow:0 20px 45px rgba(0,0,0,.08);
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+
+}
+
+
+
+.servicio-card:hover{
+
+    transform:translateY(-12px);
+    box-shadow:0 30px 60px rgba(0,0,0,.15);
+
+}
+
+
+
+.icono-servicio{
+
+    width:80px;
+    height:80px;
+    background:linear-gradient(
+        135deg,
+        var(--azulClaro),
+        var(--verdeClaro)
+    );
+    border-radius:20px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-bottom:25px;
+
+}
+
+
+
+.icono-servicio i{
+
+    color:white;
+    font-size:36px;
+
+}
+
+
+
+.servicio-card h4{
+
+    font-size:24px;
+    font-weight:700;
+    color:#082567;
+    margin-bottom:15px;
+
+}
+
+
+
+.servicio-card p{
+
+    color:#666;
+    line-height:1.8;
+    flex-grow:1;
+
+}
+
+
+
+.servicio-card a{
+
+    text-decoration:none;
+    color:var(--azulClaro);
+    font-weight:bold;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top:20px;
+
+}
+
+
+
+.servicio-card a:hover{
+
+    color:var(--verdeClaro);
+
+}
+
+/*=================================
+        ¿CÓMO FUNCIONA?
+==================================*/
+
+
+.funciona{
+
+    padding:110px 0;
+    background:white;
+
+}
+
+
+
+.paso-card{
+
+    background:#F8FBFD;
+    border-radius:22px;
+    padding:45px 30px;
+    text-align:center;
+    position:relative;
+    transition:.35s;
+    height:100%;
+    border:1px solid #E5EEF5;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+}
+
+
+
+.paso-card:hover{
+
+    transform:translateY(-10px);
+    box-shadow:0 20px 45px rgba(0,0,0,.12);
+
+}
+
+
+
+.numero{
+
+    position:absolute;
+    top:20px;
+    right:20px;
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    background:var(--azul);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:bold;
+
+}
+
+
+
+.paso-icono{
+
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    background:linear-gradient(
+        135deg,
+        var(--azulClaro),
+        var(--verdeClaro)
+    );
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-bottom:25px;
+
+}
+
+
+
+.paso-icono i{
+
+    color:white;
+    font-size:42px;
+
+}
+
+
+
+.paso-card h4{
+
+    margin-bottom:18px;
+    color:#082567;
+    font-size:24px;
+    font-weight:700;
+
+}
+
+
+
+.paso-card p{
+
+    color:#666;
+    line-height:1.8;
+
+}
+
+
+
+/*=================================
+            FOOTER
+==================================*/
+
+
+.footer{
+
+    background:#082567;
+    color:white;
+    padding:80px 0 30px;
+
+}
+
+
+
+.footer h3{
+
+    font-size:32px;
+    font-weight:800;
+    margin-bottom:20px;
+
+}
+
+
+
+.footer h3 i{
+
+    color:var(--verdeClaro);
+
+}
+
+
+
+.footer h4{
+
+    margin-bottom:25px;
+    font-weight:700;
+
+}
+
+
+
+.footer p{
+
+    color:#D9E6F2;
+    line-height:1.8;
+
+}
+
+
+
+.footer ul{
+
+    list-style:none;
+    padding:0;
+
+}
+
+
+
+.footer li{
+
+    margin-bottom:15px;
+    color:#D9E6F2;
+
+}
+
+
+
+.footer li i{
+
+    color:var(--verdeClaro);
+    margin-right:10px;
+
+}
+
+
+
+.footer a{
+
+    color:#D9E6F2;
+    text-decoration:none;
+    transition:.3s;
+
+}
+
+
+
+.footer a:hover{
+
+    color:var(--verdeClaro);
+    padding-left:8px;
+
+}
+
+
+
+.footer hr{
+
+    margin:40px 0;
+    border-color:rgba(255,255,255,.15);
+
+}
+
+
+
+.footer-copy{
+
+    text-align:center;
+    color:#AFC4D6;
+
+}
+
+
+
+/*=================================
+            MAPA
+==================================*/
+
+
+.mapa-falso,
+#mapaConductor,
+#mapa{
+
+    height:500px;
+    border-radius:20px;
+    overflow:hidden;
+
+}
+
+
+
+.mapa-falso{
+
+    background:#eef4f8;
+    border:3px dashed var(--azulClaro);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+}
+
+
+
+.mapa-falso i{
+
+    font-size:90px;
+    color:var(--azulClaro);
+    margin-bottom:20px;
+
+}
+
+
+
+.mapa-falso p{
+
+    font-size:22px;
+    color:#555;
+    text-align:center;
+
+}
+
+
+
+/*=================================
+        RESPONSIVE
+==================================*/
+
+
+@media(max-width:992px){
+
+
+    .hero h1{
+
+        font-size:42px;
+
+    }
+
+
+    .hero{
+
+        padding-top:100px;
+
+    }
+
+
+    .hero-img{
+
+        width:400px;
+        margin-top:40px;
+
+    }
+
+
+    .titulo-seccion h2{
+
+        font-size:36px;
+
+    }
+
+
+}
+
+
+
+@media(max-width:768px){
+
+
+    .navbar-brand{
+
+        font-size:24px;
+
+    }
+
+
+    .hero h1{
+
+        font-size:34px;
+
+    }
+
+
+    .hero p{
+
+        font-size:17px;
+
+    }
+
+
+    .hero-botones{
+
+        flex-direction:column;
+
+    }
+
+
+    .stat-card h2{
+
+        font-size:35px;
+
+    }
+
+
+    .servicio-card{
+
+        min-height:auto;
+
+    }
+
+
+    #mapaConductor,
+    #mapa,
+    .mapa-falso{
+
+        height:350px;
+
+    }
+
+
+}
+
+/*=================================
+        ANIMACIONES SCROLL
+==================================*/
+
+.oculto{
+
+    opacity:0;
+
+    transform:translateY(60px);
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
+
+}
+
+
+
+.mostrar{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+/*=================================
+        EFECTOS PREMIUM
+==================================*/
+
+.btn{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+
+
+.btn::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-120%;
+
+    width:60%;
+
+    height:100%;
+
+    background:linear-gradient(
+
+        120deg,
+
+        transparent,
+
+        rgba(255,255,255,.45),
+
+        transparent
+
+    );
+
+    transition:.7s;
+
+}
+
+
+
+.btn:hover::before{
+
+    left:160%;
+
+}
+
+
+
+/*=============================
+        TARJETAS
+==============================*/
+
+.stat-card,
+
+.servicio-card,
+
+.paso-card{
+
+    transform-style:preserve-3d;
+
+    will-change:transform;
+
+}
+
+/*=================================
+        HERO PREMIUM
+==================================*/
+
+.hero-fondo{
+
+    position:absolute;
+
+    inset:0;
+
+    overflow:hidden;
+
+    pointer-events:none;
+
+}
+
+
+
+.circulo{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    filter:blur(25px);
+
+    opacity:.25;
+
+    animation:flotarHero 14s linear infinite;
+
+}
+
+
+
+.c1{
+
+    width:260px;
+
+    height:260px;
+
+    background:#43A047;
+
+    top:8%;
+
+    left:5%;
+
+}
+
+
+
+.c2{
+
+    width:180px;
+
+    height:180px;
+
+    background:#1976D2;
+
+    right:8%;
+
+    top:18%;
+
+}
+
+
+
+.c3{
+
+    width:320px;
+
+    height:320px;
+
+    background:#0D47A1;
+
+    bottom:-60px;
+
+    left:25%;
+
+}
+
+
+
+.c4{
+
+    width:140px;
+
+    height:140px;
+
+    background:#66BB6A;
+
+    bottom:18%;
+
+    right:15%;
+
+}
+
+
+
+@keyframes flotarHero{
+
+    0%{
+
+        transform:
+
+        translateY(0)
+
+        translateX(0)
+
+        rotate(0deg);
+
+    }
+
+
+
+    50%{
+
+        transform:
+
+        translateY(-35px)
+
+        translateX(20px)
+
+        rotate(180deg);
+
+    }
+
+
+
+    100%{
+
+        transform:
+
+        translateY(0)
+
+        translateX(0)
+
+        rotate(360deg);
+
+    }
+
+}
+
+
+
+.hero .container{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+/*=================================
+        CURSOR LUMINOSO
+==================================*/
+
+.cursor-luz{
+
+    position:fixed;
+
+    width:260px;
+
+    height:260px;
+
+    border-radius:50%;
+
+    background:radial-gradient(
+
+        circle,
+
+        rgba(67,160,71,.18),
+
+        rgba(25,118,210,.10),
+
+        transparent 70%
+
+    );
+
+    pointer-events:none;
+
+    transform:translate(-50%,-50%);
+
+    z-index:0;
+
+    transition:
+
+        left .08s linear,
+
+        top .08s linear,
+
+        opacity .3s ease;
+
+    opacity:0;
+
+}
+
+
+
+/* Todo el contenido queda por encima */
+
+.navbar,
+
+.hero,
+
+.estadisticas,
+
+.servicios,
+
+.funciona,
+
+.footer{
+
+    position:relative;
+
+    z-index:1;
+
+}
+
+/*=========================
+    SCROLL
+==========================*/
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+
+
+::-webkit-scrollbar-track{
+
+    background:#F4F8FB;
+
+}
+
+
+
+::-webkit-scrollbar-thumb{
+
+    background:#1976D2;
+
+    border-radius:20px;
+
+}
+
+
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#0D47A1;
+
+}
+
+::selection{
+
+    background:#1976D2;
+
+    color:white;
+
+}

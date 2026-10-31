@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>
+ROUTIFY | Administrador
+</title>
+
+
+<!-- ICONOS -->
+
+<link 
+rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+>
+
+
+<!-- CSS -->
+
+<link
+rel="stylesheet"
+href="css/dashboard-admin.css"
+>
+
+
+</head>
+
+
+
+<body>
+
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+
+<div class="logo">
+
+
+<div class="logo-icon">
+
+<i class="bi bi-bus-front-fill"></i>
+
+</div>
+
+
+
+<div>
+
+<strong>
+ROUTIFY
+</strong>
+
+
+<span>
+ADMIN PANEL
+</span>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<nav>
+
+
+<a 
+class="menu activo"
+data-seccion="inicio"
+>
+
+
+<i class="bi bi-speedometer2"></i>
+
+Inicio
+
+
+</a>
+
+
+
+
+
+<a 
+class="menu"
+data-seccion="usuarios"
+>
+
+
+<i class="bi bi-people-fill"></i>
+
+Usuarios
+
+
+</a>
+
+
+
+
+
+<a 
+class="menu"
+data-seccion="conductores"
+>
+
+
+<i class="bi bi-person-badge-fill"></i>
+
+Conductores
+
+
+</a>
+
+
+
+
+
+<a 
+class="menu"
+data-seccion="buses"
+>
+
+
+<i class="bi bi-bus-front-fill"></i>
+
+Buses
+
+
+</a>
+
+
+
+
+
+<a 
+class="menu"
+data-seccion="rutas"
+>
+
+
+<i class="bi bi-signpost-split-fill"></i>
+
+Rutas
+
+
+</a>
+
+
+
+
+
+<a 
+class="menu"
+data-seccion="alertas"
+>
+
+
+<i class="bi bi-bell-fill"></i>
+
+Alertas
+
+
+</a>
+
+
+
+</nav>
+
+
+
+
+
+<button 
+id="btnCerrarSesion"
+class="logout"
+>
+
+
+<i class="bi bi-box-arrow-right"></i>
+
+
+Cerrar sesión
+
+
+</button>
+
+
+</aside>
+
+
+
+
+
+
+<!-- =====================================================
+     CONTENIDO PRINCIPAL
+===================================================== -->
+
+
+<main class="main-admin">
+
+
+
+
+
+<!-- HEADER -->
+
+<header class="admin-header">
+
+
+<div>
+
+
+<h1>
+
+Panel administrativo
+
+</h1>
+
+
+
+<p>
+
+Bienvenido,
+
+<strong id="nombreAdministrador">
+
+Administrador
+
+</strong>
+
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="admin-profile">
+
+
+<i class="bi bi-person-fill-gear"></i>
+
+
+</div>
+
+
+
+</header>
+
+
+
+
+
+
+
+<!-- =====================================================
+     SECCIÓN INICIO
+===================================================== -->
+
+
+<section 
+id="inicio"
+class="seccion activa"
+>
+
+
+
+<div class="cards">
+
+
+
+<div class="card">
+
+
+<div class="icon-card">
+
+<i class="bi bi-people-fill"></i>
+
+</div>
+
+
+
+<h3>
+Usuarios
+</h3>
+
+
+
+<strong id="totalUsuarios">
+0
+</strong>
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+
+<div class="icon-card">
+
+<i class="bi bi-person-badge-fill"></i>
+
+</div>
+
+
+
+<h3>
+Conductores
+</h3>
+
+
+
+<strong id="totalConductores">
+0
+</strong>
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+
+<div class="icon-card">
+
+<i class="bi bi-bus-front-fill"></i>
+
+</div>
+
+
+
+<h3>
+Buses activos
+</h3>
+
+
+
+<strong id="totalBuses">
+0
+</strong>
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+
+<div class="icon-card">
+
+<i class="bi bi-signpost-split-fill"></i>
+
+</div>
+
+
+
+<h3>
+Rutas
+</h3>
+
+
+
+<strong id="totalRutas">
+0
+</strong>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+<div class="panel">
+
+
+<h2>
+
+Actividad reciente
+
+</h2>
+
+
+
+<div class="empty">
+
+
+<i class="bi bi-info-circle"></i>
+
+
+<p>
+
+No hay actividad registrada todavía.
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- =====================================================
+     USUARIOS
+===================================================== -->
+
+
+<section 
+id="usuarios"
+class="seccion"
+>
+
+
+<div class="panel">
+
+
+<h2>
+
+Gestión de usuarios
+
+</h2>
+
+
+<table>
+
+
+<thead>
+
+<tr>
+
+<th>
+Nombre
+</th>
+
+
+<th>
+Correo
+</th>
+
+
+<th>
+Rol
+</th>
+
+
+<th>
+Acción
+</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+<tbody id="tablaUsuarios">
+
+
+</tbody>
+
+
+
+</table>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+
+<!-- =====================================================
+     CONDUCTORES
+===================================================== -->
+
+
+<section 
+id="conductores"
+class="seccion"
+>
+
+
+<div class="panel">
+
+
+<h2>
+
+Gestión de conductores
+
+</h2>
+
+
+<table>
+
+
+<thead>
+
+<tr>
+
+<th>
+Nombre
+</th>
+
+
+<th>
+Correo
+</th>
+
+
+<th>
+Estado
+</th>
+
+
+<th>
+Acción
+</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+<tbody id="tablaConductores">
+
+
+</tbody>
+
+
+
+</table>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- =====================================================
+     BUSES
+===================================================== -->
+
+
+<section 
+id="buses"
+class="seccion"
+>
+
+
+<div class="panel">
+
+
+<h2>
+
+Administración de buses
+
+</h2>
+
+
+<div 
+id="listaBuses"
+class="grid-items"
+>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- =====================================================
+     RUTAS
+===================================================== -->
+
+
+<section 
+id="rutas"
+class="seccion"
+>
+
+
+<div class="panel">
+
+
+<h2>
+
+Administración de rutas
+
+</h2>
+
+
+<div 
+id="listaRutas"
+class="grid-items"
+>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- =====================================================
+     ALERTAS
+===================================================== -->
+
+
+<section 
+id="alertas"
+class="seccion"
+>
+
+
+<div class="panel">
+
+
+<h2>
+
+Alertas del sistema
+
+</h2>
+
+
+<div 
+id="listaAlertas"
+class="alert-container"
+>
+
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+</main>
+
+
+
+
+
+
+<!-- JAVASCRIPT -->
+
+
+<script src="js/admin.js"></script>
+
+
+</body>
+
+
+</html>

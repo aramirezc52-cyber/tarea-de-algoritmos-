@@ -1,0 +1,2034 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        ROUTIFY | Dashboard Conductor
+    </title>
+
+
+    <!-- ==========================================
+         BOOTSTRAP ICONS
+    =========================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+
+    <!-- ==========================================
+         LEAFLET
+    =========================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+
+    <!-- ==========================================
+         CSS
+    =========================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/dashboard-conductor.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- ==========================================================
+     SIDEBAR
+========================================================== -->
+
+<aside
+    class="sidebar"
+    id="sidebar"
+>
+
+
+    <!-- LOGO -->
+
+    <div class="sidebar-header">
+
+
+        <a
+            href="index.html"
+            class="sidebar-brand"
+        >
+
+            <div class="brand-icon">
+
+                <i class="bi bi-bus-front-fill"></i>
+
+            </div>
+
+
+            <div class="brand-text">
+
+                <strong>
+                    ROUTIFY
+                </strong>
+
+                <span>
+                    SMART TRANSIT
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <button
+            class="btn-sidebar"
+            id="btnSidebar"
+            type="button"
+            aria-label="Contraer menú"
+        >
+
+            <i class="bi bi-list"></i>
+
+        </button>
+
+
+    </div>
+
+
+
+    <!-- PERFIL -->
+
+    <div class="driver-profile">
+
+
+        <div class="profile-avatar">
+
+            <i class="bi bi-person-fill"></i>
+
+            <span class="online-dot"></span>
+
+        </div>
+
+
+        <div class="profile-info">
+
+            <strong id="nombreUsuario">
+                Conductor
+            </strong>
+
+            <span>
+                Conductor activo
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- NAVEGACIÓN -->
+
+    <nav class="sidebar-nav">
+
+
+        <span class="nav-title">
+            PRINCIPAL
+        </span>
+
+
+        <a
+            href="#inicio"
+            class="nav-link active"
+        >
+
+            <i class="bi bi-grid-fill"></i>
+
+            <span>
+                Panel principal
+            </span>
+
+        </a>
+
+
+        <a
+            href="#mapaSeccion"
+            class="nav-link"
+        >
+
+            <i class="bi bi-map-fill"></i>
+
+            <span>
+                Mapa en vivo
+            </span>
+
+        </a>
+
+
+        <a
+            href="#rutaSeccion"
+            class="nav-link"
+        >
+
+            <i class="bi bi-signpost-split-fill"></i>
+
+            <span>
+                Mi ruta
+            </span>
+
+        </a>
+
+
+        <a
+            href="#paradasSeccion"
+            class="nav-link"
+        >
+
+            <i class="bi bi-geo-alt-fill"></i>
+
+            <span>
+                Paradas
+            </span>
+
+        </a>
+
+
+        <span class="nav-title nav-title-second">
+            SERVICIO
+        </span>
+
+
+        <a
+            href="#alertasSeccion"
+            class="nav-link"
+        >
+
+            <i class="bi bi-bell-fill"></i>
+
+            <span>
+                Alertas
+            </span>
+
+        </a>
+
+
+        <!-- HISTORIAL -->
+
+        <a
+            href="#historialSeccion"
+            class="nav-link"
+            id="btnHistorial"
+        >
+
+            <i class="bi bi-clock-history"></i>
+
+            <span>
+                Historial
+            </span>
+
+        </a>
+
+
+        <!-- CONFIGURACIÓN -->
+
+        <a
+            href="#configuracionSeccion"
+            class="nav-link"
+            id="btnConfiguracion"
+        >
+
+            <i class="bi bi-gear-fill"></i>
+
+            <span>
+                Configuración
+            </span>
+
+        </a>
+
+
+    </nav>
+
+
+
+    <!-- CERRAR SESIÓN -->
+
+    <div class="sidebar-footer">
+
+        <button
+            type="button"
+            class="btn-logout"
+            id="btnCerrarSesion"
+        >
+
+            <i class="bi bi-box-arrow-left"></i>
+
+            <span>
+                Cerrar sesión
+            </span>
+
+        </button>
+
+    </div>
+
+
+</aside>
+
+
+<!-- ==========================================================
+     CONTENIDO
+========================================================== -->
+
+<div
+    class="main-wrapper"
+    id="mainWrapper"
+>
+
+
+    <!-- ======================================================
+         TOPBAR
+    ====================================================== -->
+
+    <header class="topbar">
+
+
+        <div class="topbar-left">
+
+
+            <button
+                type="button"
+                class="mobile-menu"
+                id="btnMenuMobile"
+                aria-label="Abrir menú"
+            >
+
+                <i class="bi bi-list"></i>
+
+            </button>
+
+
+            <div class="topbar-title">
+
+                <span>
+                    PANEL DE OPERACIONES
+                </span>
+
+                <h1>
+                    Dashboard Conductor
+                </h1>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="topbar-right">
+
+
+            <!-- ESTADO -->
+
+            <div class="connection-status">
+
+                <span class="connection-dot"></span>
+
+                <div>
+
+                    <strong>
+                        Sistema conectado
+                    </strong>
+
+                    <small>
+                        Tiempo real
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- NOTIFICACIONES -->
+
+            <div class="topbar-dropdown-wrapper">
+
+
+                <button
+                    type="button"
+                    class="topbar-button"
+                    id="btnNotificaciones"
+                    aria-label="Notificaciones"
+                >
+
+                    <i class="bi bi-bell"></i>
+
+                    <span
+                        class="notification-dot"
+                        id="notificationDot"
+                    ></span>
+
+                </button>
+
+
+                <!-- PANEL NOTIFICACIONES -->
+
+                <div
+                    class="notifications-panel"
+                    id="panelNotificaciones"
+                >
+
+
+                    <div class="dropdown-header">
+
+
+                        <div>
+
+                            <span class="dropdown-label">
+                                CENTRO DE AVISOS
+                            </span>
+
+                            <h4>
+                                Notificaciones
+                            </h4>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="dropdown-close"
+                            id="btnCerrarNotificaciones"
+                            aria-label="Cerrar notificaciones"
+                        >
+
+                            <i class="bi bi-x-lg"></i>
+
+                        </button>
+
+
+                    </div>
+
+
+                    <div
+                        class="notifications-list"
+                        id="listaNotificaciones"
+                    >
+
+
+                        <div class="notification-item unread">
+
+
+                            <div class="notification-icon success">
+
+                                <i class="bi bi-check-lg"></i>
+
+                            </div>
+
+
+                            <div class="notification-content">
+
+                                <strong>
+                                    Sistema conectado
+                                </strong>
+
+                                <span>
+                                    ROUTIFY está listo para iniciar operaciones.
+                                </span>
+
+                                <small>
+                                    Ahora
+                                </small>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="notification-item">
+
+
+                            <div class="notification-icon info">
+
+                                <i class="bi bi-geo-alt-fill"></i>
+
+                            </div>
+
+
+                            <div class="notification-content">
+
+                                <strong>
+                                    Seguimiento disponible
+                                </strong>
+
+                                <span>
+                                    El seguimiento de la unidad estará disponible durante el recorrido.
+                                </span>
+
+                                <small>
+                                    Sistema
+                                </small>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="dropdown-footer">
+
+                        <button
+                            type="button"
+                            id="btnMarcarLeidas"
+                        >
+
+                            <i class="bi bi-check2-all"></i>
+
+                            Marcar como leídas
+
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- TEMA -->
+
+            <button
+                type="button"
+                class="topbar-button"
+                id="btnTema"
+                aria-label="Cambiar tema"
+            >
+
+                <i
+                    class="bi bi-moon-fill"
+                    id="iconTema"
+                ></i>
+
+            </button>
+
+
+            <!-- USUARIO -->
+
+            <div class="topbar-dropdown-wrapper">
+
+
+                <button
+                    type="button"
+                    class="topbar-user"
+                    id="btnPerfil"
+                >
+
+
+                    <div class="topbar-avatar">
+
+                        <i class="bi bi-person-fill"></i>
+
+                    </div>
+
+
+                    <div class="topbar-user-info">
+
+                        <strong id="nombreTopbar">
+                            Conductor
+                        </strong>
+
+                        <span>
+                            Operador
+                        </span>
+
+                    </div>
+
+
+                    <i class="bi bi-chevron-down user-chevron"></i>
+
+
+                </button>
+
+
+                <!-- MENÚ DEL PERFIL -->
+
+                <div
+                    class="profile-dropdown"
+                    id="menuPerfil"
+                >
+
+
+                    <div class="profile-dropdown-header">
+
+
+                        <div class="profile-dropdown-avatar">
+
+                            <i class="bi bi-person-fill"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong id="nombreMenuPerfil">
+                                Conductor
+                            </strong>
+
+                            <span>
+                                Operador ROUTIFY
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="profile-dropdown-menu">
+
+
+                        <button
+                            type="button"
+                            id="btnMiPerfil"
+                        >
+
+                            <i class="bi bi-person"></i>
+
+                            <span>
+                                Mi perfil
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            id="btnConfiguracionPerfil"
+                        >
+
+                            <i class="bi bi-gear"></i>
+
+                            <span>
+                                Configuración
+                            </span>
+
+                        </button>
+
+
+                        <div class="profile-menu-divider"></div>
+
+
+                        <button
+                            type="button"
+                            class="logout-option"
+                            id="btnCerrarSesionPerfil"
+                        >
+
+                            <i class="bi bi-box-arrow-right"></i>
+
+                            <span>
+                                Cerrar sesión
+                            </span>
+
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </header>
+
+
+    <!-- ======================================================
+         MAIN
+    ====================================================== -->
+
+    <main
+        class="dashboard-content"
+        id="inicio"
+    >
+
+
+        <!-- ==================================================
+             BIENVENIDA
+        ================================================== -->
+
+        <section class="welcome-section">
+
+
+            <div>
+
+
+                <div class="section-label">
+
+                    <span></span>
+
+                    CENTRO DE OPERACIONES
+
+                </div>
+
+
+                <h2>
+
+                    Buenos días,
+
+                    <span id="nombreBienvenida">
+                        Conductor
+                    </span>
+
+                </h2>
+
+
+                <p>
+                    Administra tu unidad, recorrido y comunicación
+                    con los pasajeros desde un solo lugar.
+                </p>
+
+
+            </div>
+
+
+            <div class="date-card">
+
+
+                <div class="date-icon">
+
+                    <i class="bi bi-calendar3"></i>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Fecha
+                    </span>
+
+                    <strong id="fechaActual">
+                        --
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ==================================================
+             ESTADÍSTICAS
+        ================================================== -->
+
+        <section class="stats-grid">
+
+
+            <!-- UNIDAD -->
+
+            <article class="stat-card">
+
+
+                <div class="stat-top">
+
+
+                    <div class="stat-icon blue">
+
+                        <i class="bi bi-bus-front-fill"></i>
+
+                    </div>
+
+
+                    <span class="status-badge active">
+                        ACTIVO
+                    </span>
+
+
+                </div>
+
+
+                <span class="stat-label">
+                    Mi unidad
+                </span>
+
+
+                <strong
+                    class="stat-value"
+                    id="numeroUnidad"
+                >
+                    BUS-001
+                </strong>
+
+
+                <small>
+                    Unidad asignada
+                </small>
+
+
+            </article>
+
+
+            <!-- RUTA -->
+
+            <article class="stat-card">
+
+
+                <div class="stat-top">
+
+
+                    <div class="stat-icon cyan">
+
+                        <i class="bi bi-signpost-2-fill"></i>
+
+                    </div>
+
+
+                    <span class="status-badge">
+                        RUTA
+                    </span>
+
+
+                </div>
+
+
+                <span class="stat-label">
+                    Ruta actual
+                </span>
+
+
+                <strong
+                    class="stat-value"
+                    id="rutaActual"
+                >
+                    Sin iniciar
+                </strong>
+
+
+                <small>
+                    Configuración del recorrido
+                </small>
+
+
+            </article>
+
+
+            <!-- GPS -->
+
+            <article class="stat-card">
+
+
+                <div class="stat-top">
+
+
+                    <div class="stat-icon green">
+
+                        <i class="bi bi-broadcast-pin"></i>
+
+                    </div>
+
+
+                    <span
+                        class="status-badge active"
+                        id="estadoGPS"
+                    >
+                        CONECTADO
+                    </span>
+
+
+                </div>
+
+
+                <span class="stat-label">
+                    Información GPS
+                </span>
+
+
+                <strong
+                    class="stat-value"
+                    id="precisionGPS"
+                >
+                    Disponible
+                </strong>
+
+
+                <small>
+                    Seguimiento de ubicación
+                </small>
+
+
+            </article>
+
+
+            <!-- PARADAS -->
+
+            <article class="stat-card">
+
+
+                <div class="stat-top">
+
+
+                    <div class="stat-icon purple">
+
+                        <i class="bi bi-geo-alt-fill"></i>
+
+                    </div>
+
+
+                    <span class="status-badge">
+                        VIAJE
+                    </span>
+
+
+                </div>
+
+
+                <span class="stat-label">
+                    Próximas paradas
+                </span>
+
+
+                <strong
+                    class="stat-value"
+                    id="cantidadParadas"
+                >
+                    0
+                </strong>
+
+
+                <small>
+                    Paradas pendientes
+                </small>
+
+
+            </article>
+
+
+        </section>
+
+
+        <!-- ==================================================
+             CONTROL DE RUTA
+        ================================================== -->
+
+        <section
+            class="dashboard-card route-control-card"
+            id="rutaSeccion"
+        >
+
+
+            <div class="card-header">
+
+
+                <div>
+
+
+                    <div class="section-label">
+
+                        <span></span>
+
+                        OPERACIÓN
+
+                    </div>
+
+
+                    <h3>
+                        Control de Ruta
+                    </h3>
+
+
+                    <p>
+                        Configura y controla el recorrido de tu unidad.
+                    </p>
+
+
+                </div>
+
+
+                <div
+                    class="route-state"
+                    id="estadoRuta"
+                >
+
+                    <span></span>
+
+                    Ruta sin iniciar
+
+                </div>
+
+
+            </div>
+
+
+            <div class="route-control-content">
+
+
+                <div class="route-selector">
+
+
+                    <label for="selectRuta">
+
+                        <i class="bi bi-signpost-split"></i>
+
+                        Configuración de ruta
+
+                    </label>
+
+
+                    <div class="select-wrapper">
+
+
+                        <select id="selectRuta">
+
+                            <option value="">
+                                Selecciona una ruta
+                            </option>
+
+                            <option value="Ruta 1">
+                                Ruta 1
+                            </option>
+
+                            <option value="Ruta 2">
+                                Ruta 2
+                            </option>
+
+                            <option value="Ruta 3">
+                                Ruta 3
+                            </option>
+
+                        </select>
+
+
+                        <i class="bi bi-chevron-down"></i>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="route-actions">
+
+
+                    <button
+                        type="button"
+                        class="route-button start"
+                        id="btnIniciarRuta"
+                    >
+
+                        <i class="bi bi-play-fill"></i>
+
+                        <span>
+                            Iniciar ruta
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="route-button pause"
+                        id="btnPausarRuta"
+                        disabled
+                    >
+
+                        <i class="bi bi-pause-fill"></i>
+
+                        <span>
+                            Pausar
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="route-button finish"
+                        id="btnFinalizarRuta"
+                        disabled
+                    >
+
+                        <i class="bi bi-stop-fill"></i>
+
+                        <span>
+                            Finalizar
+                        </span>
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+                <!-- ==================================================
+             MAPA + PARADAS
+        ================================================== -->
+
+        <section class="dashboard-grid-main">
+
+
+            <!-- MAPA -->
+
+            <article
+                class="dashboard-card map-card"
+                id="mapaSeccion"
+            >
+
+
+                <div class="card-header compact">
+
+
+                    <div>
+
+
+                        <div class="section-label">
+
+                            <span></span>
+
+                            UBICACIÓN EN VIVO
+
+                        </div>
+
+
+                        <h3>
+                            Seguimiento de unidad
+                        </h3>
+
+
+                    </div>
+
+
+                    <div class="map-live">
+
+                        <span></span>
+
+                        EN VIVO
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="map-wrapper">
+
+
+                    <div id="mapa"></div>
+
+
+                    <!-- PANEL MAPA -->
+
+                    <div class="map-bus-panel">
+
+
+                        <div class="map-bus-icon">
+
+                            <i class="bi bi-bus-front-fill"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Unidad actual
+                            </span>
+
+                            <strong id="unidadMapa">
+                                BUS-001
+                            </strong>
+
+                        </div>
+
+
+                        <div class="map-speed">
+
+                            <span>
+                                Velocidad
+                            </span>
+
+                            <strong id="velocidadBus">
+                                0 km/h
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </article>
+
+
+            <!-- PRÓXIMAS PARADAS -->
+
+            <article
+                class="dashboard-card stops-card"
+                id="paradasSeccion"
+            >
+
+
+                <div class="card-header compact">
+
+
+                    <div>
+
+
+                        <div class="section-label">
+
+                            <span></span>
+
+                            RECORRIDO
+
+                        </div>
+
+
+                        <h3>
+                            Próximas Paradas
+                        </h3>
+
+
+                    </div>
+
+
+                    <i class="bi bi-geo-alt-fill header-icon"></i>
+
+
+                </div>
+
+
+                <div
+                    class="stops-list"
+                    id="listaParadas"
+                >
+
+
+                    <div class="empty-state">
+
+
+                        <div class="empty-icon">
+
+                            <i class="bi bi-signpost-split"></i>
+
+                        </div>
+
+
+                        <strong>
+                            Sin ruta activa
+                        </strong>
+
+
+                        <span>
+                            Inicia una ruta para mostrar las próximas paradas.
+                        </span>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </article>
+
+
+        </section>
+
+
+        <!-- ==================================================
+             ALERTAS
+        ================================================== -->
+
+        <section
+            class="dashboard-card alerts-card"
+            id="alertasSeccion"
+        >
+
+
+            <div class="card-header">
+
+
+                <div>
+
+
+                    <div class="section-label">
+
+                        <span></span>
+
+                        COMUNICACIÓN
+
+                    </div>
+
+
+                    <h3>
+                        Alertas a Pasajeros
+                    </h3>
+
+
+                    <p>
+                        Informa rápidamente cualquier cambio durante el recorrido.
+                    </p>
+
+
+                </div>
+
+
+                <i class="bi bi-megaphone-fill header-icon"></i>
+
+
+            </div>
+
+
+            <div class="alerts-grid">
+
+
+                <!-- RETRASO -->
+
+                <button
+                    type="button"
+                    class="alert-option delay"
+                    id="btnAlertaRetraso"
+                >
+
+
+                    <div class="alert-option-icon">
+
+                        <i class="bi bi-clock-fill"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Retraso
+                        </strong>
+
+                        <span>
+                            Informar demora del servicio.
+                        </span>
+
+                    </div>
+
+
+                    <i class="bi bi-arrow-right"></i>
+
+
+                </button>
+
+
+                <!-- ACCIDENTE -->
+
+                <button
+                    type="button"
+                    class="alert-option accident"
+                    id="btnAlertaAccidente"
+                >
+
+
+                    <div class="alert-option-icon">
+
+                        <i class="bi bi-exclamation-triangle-fill"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Accidente
+                        </strong>
+
+                        <span>
+                            Reportar una incidencia en ruta.
+                        </span>
+
+                    </div>
+
+
+                    <i class="bi bi-arrow-right"></i>
+
+
+                </button>
+
+
+                <!-- CAMBIO DE RUTA -->
+
+                <button
+                    type="button"
+                    class="alert-option change"
+                    id="btnAlertaCambio"
+                >
+
+
+                    <div class="alert-option-icon">
+
+                        <i class="bi bi-sign-turn-right-fill"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Cambio de ruta
+                        </strong>
+
+                        <span>
+                            Avisar modificación del recorrido.
+                        </span>
+
+                    </div>
+
+
+                    <i class="bi bi-arrow-right"></i>
+
+
+                </button>
+
+
+            </div>
+
+
+            <!-- ÚLTIMA ALERTA -->
+
+            <div
+                class="last-alert"
+                id="ultimaAlerta"
+            >
+
+
+                <div>
+
+                    <i class="bi bi-info-circle"></i>
+
+                    <span>
+                        No has enviado alertas durante este recorrido.
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ==================================================
+             INFORMACIÓN DEL VIAJE
+        ================================================== -->
+
+        <section class="trip-grid">
+
+
+            <!-- TIEMPO -->
+
+            <article class="dashboard-card trip-card">
+
+
+                <div class="trip-icon">
+
+                    <i class="bi bi-stopwatch-fill"></i>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Tiempo de recorrido
+                    </span>
+
+                    <strong id="tiempoRecorrido">
+                        00:00:00
+                    </strong>
+
+                </div>
+
+
+            </article>
+
+
+            <!-- DISTANCIA -->
+
+            <article class="dashboard-card trip-card">
+
+
+                <div class="trip-icon">
+
+                    <i class="bi bi-speedometer"></i>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Distancia recorrida
+                    </span>
+
+                    <strong id="distanciaRecorrida">
+                        0.0 km
+                    </strong>
+
+                </div>
+
+
+            </article>
+
+
+            <!-- PARADAS -->
+
+            <article class="dashboard-card trip-card">
+
+
+                <div class="trip-icon">
+
+                    <i class="bi bi-pin-map-fill"></i>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Paradas completadas
+                    </span>
+
+                    <strong id="paradasCompletadas">
+                        0
+                    </strong>
+
+                </div>
+
+
+            </article>
+
+
+        </section>
+
+
+        <!-- ==================================================
+             HISTORIAL
+        ================================================== -->
+
+        <section
+            class="dashboard-card history-card"
+            id="historialSeccion"
+        >
+
+
+            <div class="card-header">
+
+
+                <div>
+
+
+                    <div class="section-label">
+
+                        <span></span>
+
+                        ACTIVIDAD
+
+                    </div>
+
+
+                    <h3>
+                        Historial de Recorridos
+                    </h3>
+
+
+                    <p>
+                        Consulta los últimos recorridos realizados con tu unidad.
+                    </p>
+
+
+                </div>
+
+
+                <div class="history-header-icon">
+
+                    <i class="bi bi-clock-history"></i>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- RESUMEN DEL HISTORIAL -->
+
+            <div class="history-summary">
+
+
+                <div class="history-summary-item">
+
+                    <span>
+                        Recorridos
+                    </span>
+
+                    <strong id="totalRecorridos">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="history-summary-item">
+
+                    <span>
+                        Distancia total
+                    </span>
+
+                    <strong id="distanciaTotalHistorial">
+                        0.0 km
+                    </strong>
+
+                </div>
+
+
+                <div class="history-summary-item">
+
+                    <span>
+                        Tiempo en ruta
+                    </span>
+
+                    <strong id="tiempoTotalHistorial">
+                        00:00:00
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- LISTA DEL HISTORIAL -->
+
+            <div
+                class="history-list"
+                id="listaHistorial"
+            >
+
+
+                <div class="history-empty">
+
+
+                    <div class="history-empty-icon">
+
+                        <i class="bi bi-clock-history"></i>
+
+                    </div>
+
+
+                    <strong>
+                        Sin recorridos registrados
+                    </strong>
+
+
+                    <span>
+                        Los recorridos finalizados aparecerán aquí.
+                    </span>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ==================================================
+             CONFIGURACIÓN
+        ================================================== -->
+
+        <section
+            class="dashboard-card settings-card"
+            id="configuracionSeccion"
+        >
+
+
+            <div class="card-header">
+
+
+                <div>
+
+
+                    <div class="section-label">
+
+                        <span></span>
+
+                        PREFERENCIAS
+
+                    </div>
+
+
+                    <h3>
+                        Configuración
+                    </h3>
+
+
+                    <p>
+                        Personaliza el funcionamiento de tu panel ROUTIFY.
+                    </p>
+
+
+                </div>
+
+
+                <div class="settings-header-icon">
+
+                    <i class="bi bi-gear-fill"></i>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="settings-grid">
+
+
+                <!-- NOTIFICACIONES -->
+
+                <div class="setting-item">
+
+
+                    <div class="setting-icon">
+
+                        <i class="bi bi-bell-fill"></i>
+
+                    </div>
+
+
+                    <div class="setting-info">
+
+                        <strong>
+                            Notificaciones
+                        </strong>
+
+                        <span>
+                            Mostrar avisos importantes durante el recorrido.
+                        </span>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="configNotificaciones"
+                            checked
+                        >
+
+                        <span class="switch-slider"></span>
+
+                    </label>
+
+
+                </div>
+
+
+                <!-- SONIDOS -->
+
+                <div class="setting-item">
+
+
+                    <div class="setting-icon">
+
+                        <i class="bi bi-volume-up-fill"></i>
+
+                    </div>
+
+
+                    <div class="setting-info">
+
+                        <strong>
+                            Sonidos
+                        </strong>
+
+                        <span>
+                            Reproducir avisos del sistema.
+                        </span>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="configSonidos"
+                            checked
+                        >
+
+                        <span class="switch-slider"></span>
+
+                    </label>
+
+
+                </div>
+
+
+                <!-- SEGUIMIENTO -->
+
+                <div class="setting-item">
+
+
+                    <div class="setting-icon">
+
+                        <i class="bi bi-broadcast-pin"></i>
+
+                    </div>
+
+
+                    <div class="setting-info">
+
+                        <strong>
+                            Seguimiento durante la ruta
+                        </strong>
+
+                        <span>
+                            Permitir seguimiento de la unidad mientras exista un recorrido activo.
+                        </span>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="configGPS"
+                            checked
+                        >
+
+                        <span class="switch-slider"></span>
+
+                    </label>
+
+
+                </div>
+
+
+                <!-- TEMA -->
+
+                <div class="setting-item">
+
+
+                    <div class="setting-icon">
+
+                        <i class="bi bi-moon-stars-fill"></i>
+
+                    </div>
+
+
+                    <div class="setting-info">
+
+                        <strong>
+                            Tema oscuro
+                        </strong>
+
+                        <span>
+                            Utilizar la apariencia oscura de ROUTIFY.
+                        </span>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="configTemaOscuro"
+                            checked
+                        >
+
+                        <span class="switch-slider"></span>
+
+                    </label>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- BOTONES CONFIGURACIÓN -->
+
+            <div class="settings-actions">
+
+
+                <button
+                    type="button"
+                    class="settings-reset"
+                    id="btnRestablecerConfiguracion"
+                >
+
+                    <i class="bi bi-arrow-counterclockwise"></i>
+
+                    <span>
+                        Restablecer
+                    </span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="settings-save"
+                    id="btnGuardarConfiguracion"
+                >
+
+                    <i class="bi bi-check2-circle"></i>
+
+                    <span>
+                        Guardar configuración
+                    </span>
+
+                </button>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+    <!-- ======================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="dashboard-footer">
+
+
+        <span>
+            © 2026 ROUTIFY · Sistema Inteligente de Transporte Público
+        </span>
+
+
+        <div>
+
+            <span class="footer-status"></span>
+
+            Sistema operativo
+
+        </div>
+
+
+    </footer>
+
+
+</div>
+
+
+<!-- ==========================================================
+     NOTIFICACIÓN FLOTANTE
+========================================================== -->
+
+<div
+    class="toast-routify"
+    id="toastRoutify"
+>
+
+
+    <div
+        class="toast-icon"
+        id="toastIcon"
+    >
+
+        <i class="bi bi-check-lg"></i>
+
+    </div>
+
+
+    <div class="toast-content">
+
+        <strong id="toastTitulo">
+            ROUTIFY
+        </strong>
+
+        <span id="toastMensaje">
+            Operación realizada.
+        </span>
+
+    </div>
+
+
+    <button
+        type="button"
+        id="btnCerrarToast"
+        aria-label="Cerrar notificación"
+    >
+
+        <i class="bi bi-x-lg"></i>
+
+    </button>
+
+
+</div>
+
+
+<!-- ==========================================================
+     LEAFLET
+========================================================== -->
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+></script>
+
+
+<!-- ==========================================================
+     JAVASCRIPT ROUTIFY
+========================================================== -->
+<script src="js/proteger-conductor.js"></script>
+<script src="js/sesion-conductor.js"></script>
+
+<script src="js/dashboard-conductor.js"></script>
+
+
+</body>
+
+</html>
